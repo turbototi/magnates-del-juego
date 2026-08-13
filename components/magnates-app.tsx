@@ -63,6 +63,27 @@ export function MagnatesApp() {
     setCart((prev) => ({ ...prev, [p.id]: (prev[p.id] ?? 0) + 1 }))
   }
 
+  function updateQuantity(id: string, delta: number) {
+    setCart((prev) => {
+      const current = prev[id] || 0
+      const updated = current + delta
+      if (updated <= 0) {
+        const next = { ...prev }
+        delete next[id]
+        return next
+      }
+      return { ...prev, [id]: updated }
+    })
+  }
+
+  function removeItem(id: string) {
+    setCart((prev) => {
+      const next = { ...prev }
+      delete next[id]
+      return next
+    })
+  }
+
   function addProduct(p: Product) {
     setProducts((prev) => [p, ...prev])
   }
@@ -111,6 +132,8 @@ export function MagnatesApp() {
           items={cartItems}
           total={total}
           onCloseAction={() => setCheckoutOpen(false)}
+          onUpdateQuantityAction={updateQuantity}
+          onRemoveItemAction={removeItem}
         />
       ) : null}
     </>

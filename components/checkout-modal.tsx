@@ -8,6 +8,7 @@ import {
   Factory,
   MessageCircle,
   Send,
+  Trash2,
   Wallet,
   X,
 } from 'lucide-react'
@@ -31,18 +32,45 @@ function CopyButton({
   className?: string
 }) {
   const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      // Método moderno
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+        return
+      }
+    } catch {
+      // Si falla, pasa al método de respaldo
+    }
+
+    // Método de respaldo clásico (compatible con cualquier entorno o IP local)
+    try {
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      textArea.style.position = 'fixed' // Evita scroll alfanumérico
+      textArea.style.opacity = '0'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      if (successful) {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
+    } catch (err) {
+      console.error('Error al intentar copiar:', err)
+    }
+  }
+
   return (
     <button
       type="button"
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(text)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        } catch {
-          setCopied(false)
-        }
-      }}
+      onClick={handleCopy}
       className={
         className ??
         'inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted'
@@ -62,10 +90,14 @@ export function CheckoutModal({
   items,
   total,
   onCloseAction,
+  onUpdateQuantityAction,
+  onRemoveItemAction,
 }: {
   items: CartItem[]
   total: number
   onCloseAction: () => void
+  onUpdateQuantityAction: (id: string, delta: number) => void
+  onRemoveItemAction: (id: string) => void
 }) {
   // Estados para cargar el Alias y el Titular configurados en el Admin
   const [alias, setAlias] = useState(ALIAS)
@@ -81,18 +113,27 @@ export function CheckoutModal({
   const productLines = useMemo(
     () =>
       items
-        .map(
-          (i) =>
-            `${i.nombre}${i.cantidad > 1 ? ` x${i.cantidad}` : ''}`,
-        )
-        .join(', '),
+        .map((i) => {
+          const subtotal = i.precio * i.cantidad
+          const precioTexto = i.precio === 0 ? 'A pedido' : formatARS(subtotal)
+          return `\n   • ${i.nombre} ${i.cantidad > 1 ? `(x${i.cantidad})` : ''} - ${precioTexto}`
+        })
+        .join(''),
     [items],
   )
+
+  // Lógica inteligente para mostrar el total de forma profesional
+  const totalDisplay = useMemo(() => {
+    const tieneSinPrecio = items.some((i) => i.precio === 0)
+    if (total === 0 && tieneSinPrecio) return 'A cotizar en chat'
+    if (tieneSinPrecio && total > 0) return `${formatARS(total)} + A pedido`
+    return formatARS(total)
+  }, [items, total])
 
   const template = useMemo(
     () =>
       `Hola Magnates! Dejo mis datos para el pedido:
-- Productos: ${productLines}
+- Productos:${productLines}
 - Talle (si aplica): 
 - Nombre y Apellido: 
 - Dirección de envío: 
@@ -132,6 +173,65 @@ export function CheckoutModal({
         </header>
 
         <div className="flex flex-col gap-5 overflow-y-auto px-5 py-5">
+          {/* Listado y gestión rápida de productos en el checkout */}
+          <section className="flex flex-col gap-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Productos en tu pedido
+            </h3>
+            <div className="flex flex-col gap-2">
+              {items.map((i) => (
+                <div
+                  key={i.id}
+                  className="flex items-center justify-between rounded-xl border border-border bg-secondary p-2.5"
+                >
+                  <div className="flex flex-col pr-2">
+                    <span className="text-xs font-semibold text-foreground">
+                      {i.nombre}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground">
+                      {i.precio === 0 ? 'A pedido' : formatARS(i.precio * i.cantidad)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {/* Control de cantidad */}
+                    <div className="flex items-center gap-1 rounded-lg border border-border bg-card px-2 py-1">
+                      <button
+                        type="button"
+                        onClick={() => onUpdateQuantityAction(i.id, -1)}
+                        className="text-muted-foreground hover:text-foreground px-1 text-xs font-bold"
+                        aria-label="Disminuir cantidad"
+                      >
+                        -
+                      </button>
+                      <span className="font-mono text-xs font-bold text-foreground w-4 text-center">
+                        {i.cantidad}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => onUpdateQuantityAction(i.id, 1)}
+                        className="text-muted-foreground hover:text-foreground px-1 text-xs font-bold"
+                        aria-label="Aumentar cantidad"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    {/* Botón eliminar */}
+                    <button
+                      type="button"
+                      onClick={() => onRemoveItemAction(i.id)}
+                      className="flex size-7 items-center justify-center rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 transition-colors hover:bg-red-500/20"
+                      aria-label="Eliminar producto"
+                    >
+                      <Trash2 className="size-3.5" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Paso 1 */}
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
@@ -227,7 +327,7 @@ export function CheckoutModal({
               Total productos
             </span>
             <span className="font-mono text-base font-bold text-dollar">
-              {total === 0 ? 'A pedido' : formatARS(total)}
+              {totalDisplay}
             </span>
           </div>
         </div>
