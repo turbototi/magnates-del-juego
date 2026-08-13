@@ -6,11 +6,11 @@ import { formatARS } from '@/lib/store'
 export function CartBar({
   count,
   total,
-  onCheckout,
+  onCheckoutAction,
 }: {
   count: number
   total: number
-  onCheckout: () => void
+  onCheckoutAction: () => void
 }) {
   if (count === 0) return null
 
@@ -19,7 +19,7 @@ export function CartBar({
       <div className="mx-auto max-w-md p-3">
         <button
           type="button"
-          onClick={onCheckout}
+          onClick={onCheckoutAction}
           aria-label="Abrir formulario de pago y despacho"
           className="flex w-full items-center justify-between gap-3 rounded-2xl border border-primary/40 bg-primary px-4 py-3 text-primary-foreground shadow-lg shadow-primary/20 transition-transform active:translate-y-px"
         >
