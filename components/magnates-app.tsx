@@ -104,13 +104,13 @@ export function MagnatesApp() {
       <CartBar
         count={count}
         total={total}
-        onCheckout={() => setCheckoutOpen(true)}
+        onCheckoutAction={() => setCheckoutOpen(true)}
       />
       {checkoutOpen ? (
         <CheckoutModal
           items={cartItems}
           total={total}
-          onClose={() => setCheckoutOpen(false)}
+          onCloseAction={() => setCheckoutOpen(false)}
         />
       ) : null}
     </>

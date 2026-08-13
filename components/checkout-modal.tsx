@@ -61,11 +61,11 @@ function CopyButton({
 export function CheckoutModal({
   items,
   total,
-  onClose,
+  onCloseAction,
 }: {
   items: CartItem[]
   total: number
-  onClose: () => void
+  onCloseAction: () => void
 }) {
   // Estados para cargar el Alias y el Titular configurados en el Admin
   const [alias, setAlias] = useState(ALIAS)
@@ -108,7 +108,7 @@ export function CheckoutModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="checkout-title"
-      onClick={onClose}
+      onClick={onCloseAction}
     >
       <div
         className="flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl border border-border bg-card animate-in slide-in-from-bottom-6 duration-300 sm:rounded-3xl"
@@ -123,7 +123,7 @@ export function CheckoutModal({
           </h2>
           <button
             type="button"
-            onClick={onClose}
+            onClick={onCloseAction}
             aria-label="Cerrar"
             className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
