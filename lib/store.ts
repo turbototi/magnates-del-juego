@@ -109,6 +109,7 @@ export function saveProducts(products: Product[]) {
 }
 
 export function formatARS(value: number): string {
+  if (value <= 0) return 'A pedido'
   return new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency: 'ARS',

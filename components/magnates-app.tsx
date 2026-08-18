@@ -15,6 +15,7 @@ import { StoreView } from '@/components/store-view'
 import { CartBar } from '@/components/cart-bar'
 import { CheckoutModal } from '@/components/checkout-modal'
 import { AdminPanel } from '@/components/admin-panel'
+import { FloatingChat } from '@/components/floating-chat'
 
 export function MagnatesApp() {
   const [products, setProducts] = useState<Product[]>([])
@@ -127,6 +128,7 @@ export function MagnatesApp() {
         total={total}
         onCheckoutAction={() => setCheckoutOpen(true)}
       />
+      <FloatingChat />
       {checkoutOpen ? (
         <CheckoutModal
           items={cartItems}
