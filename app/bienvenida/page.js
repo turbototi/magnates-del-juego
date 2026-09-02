@@ -26,10 +26,10 @@ export default function BienvenidaPage() {
           </p>
         </div>
 
-        {/* Video directo sin iframe para evitar bloqueos de YouTube */}
+        {/* Video directo levantado desde tu carpeta public */}
         <div className="relative w-full aspect-[9/16] max-h-[40vh] sm:max-h-[440px] bg-zinc-950 rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_25px_rgba(234,179,8,0.15)] flex items-center justify-center my-1">
           <video 
-            src="https://googlevideo.com"
+            src="/0902 (1)(1).mp4"
             className="absolute inset-0 w-full h-full object-cover"
             controls
             playsInline
