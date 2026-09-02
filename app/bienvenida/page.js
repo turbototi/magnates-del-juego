@@ -31,7 +31,7 @@ export default function BienvenidaPage() {
           
           <iframe 
             className="absolute inset-0 w-full h-full"
-            src="https://youtube.com" 
+            src="https://youtube.com"
             title="Magnates del Juego - Bienvenida"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowFullScreen
