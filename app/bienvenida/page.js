@@ -8,7 +8,7 @@ export default function BienvenidaPage() {
       {/* Contenedor flexible que se adapta perfectamente a la pantalla del celular */}
       <div className="relative z-10 w-full max-w-xs sm:max-w-sm flex flex-col items-center justify-between h-full my-auto space-y-3">
         
-        {/* Manifiesto y texto principal */}
+        {/* Bitácora y texto principal */}
         <div className="space-y-1.5 text-center w-full">
           <div className="flex items-center justify-center gap-2 opacity-60">
             <div className="h-[1px] w-6 bg-yellow-500/50" />
@@ -26,15 +26,14 @@ export default function BienvenidaPage() {
           </p>
         </div>
 
-        {/* Video en formato short vertical adaptado para no salirse de la pantalla */}
+        {/* Video directo sin iframe para evitar bloqueos de YouTube */}
         <div className="relative w-full aspect-[9/16] max-h-[40vh] sm:max-h-[440px] bg-zinc-950 rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_25px_rgba(234,179,8,0.15)] flex items-center justify-center my-1">
-          
-          <iframe 
-            className="absolute inset-0 w-full h-full"
-            src="https://youtube.com"
-            title="Magnates del Juego - Bienvenida"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
+          <video 
+            src="https://googlevideo.com"
+            className="absolute inset-0 w-full h-full object-cover"
+            controls
+            playsInline
+            preload="auto"
           />
         </div>
 
