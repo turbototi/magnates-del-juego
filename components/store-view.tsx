@@ -77,8 +77,8 @@ export function StoreView({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/banner-auto.webp"
-            alt="Gorra y vaso térmico de Magnates del Juego en el interior de un auto deportivo de lujo"
+            src="/nautico_1920x1080.jpg"
+            alt="Gorra y vaso térmico de Magnates del Juego en un entorno náutico premium"
             className="h-56 w-full object-cover sm:h-64"
             loading="lazy"
           />
