@@ -16,7 +16,7 @@ export function ProductCard({
     ? product.imagen.split(',').map(img => img.trim())
     : [product.imagen]
 
-  // Inicializamos con la primera foto de la lista de forma limpia
+  // Corregido: inicializamos con la primera foto de la lista de forma limpia
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
 
   return (
@@ -30,7 +30,7 @@ export function ProductCard({
           loading="lazy"
         />
         {gallery.length > 1 ? (
-          <div className="absolute inset-x-0 bottom-0 flex justify-center gap-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 z-10 overflow-x-auto">
+          <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/70 to-transparent p-2 z-10">
             {gallery.map((img, i) => (
               <button
                 key={img}
@@ -38,10 +38,10 @@ export function ProductCard({
                 onClick={() => setActiveImg(img)}
                 aria-label={`Ver imagen ${i + 1} de ${product.nombre}`}
                 aria-pressed={activeImg === img}
-                className={`size-14 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                className={`size-8 shrink-0 overflow-hidden rounded-md border-2 transition-colors ${
                   activeImg === img
-                    ? 'border-gold scale-105 shadow-md'
-                    : 'border-white/20 hover:border-white/50 bg-black/40'
+                    ? 'border-gold'
+                    : 'border-white/30 hover:border-white/60'
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
