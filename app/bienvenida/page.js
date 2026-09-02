@@ -13,16 +13,16 @@ export default function BienvenidaPage() {
           <div className="flex items-center justify-center gap-2 opacity-60">
             <div className="h-[1px] w-6 bg-yellow-500/50" />
             <span className="text-[8px] sm:text-[9px] tracking-[0.3em] uppercase text-yellow-500 font-semibold">
-              Manifiesto
+              Bitácora
             </span>
             <div className="h-[1px] w-6 bg-yellow-500/50" />
           </div>
 
           <h1 className="text-lg sm:text-xl font-bold tracking-wider text-yellow-400">
-            EL JUEGO SIGUE
+            BUSCA TU RUMBO
           </h1>
           <p className="text-[11px] sm:text-xs text-zinc-400 leading-snug px-1">
-            Si estás acá, ya sabés que las cartas no siempre vienen como uno quiere. Lo importante es cómo se juega la mano que sigue.
+            Si estás acá, ya sabés que los vientos no siempre soplan como uno quiere. Lo importante es cómo uno busca su rumbo.
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export default function BienvenidaPage() {
           
           <iframe 
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE?autoplay=1&mute=0&controls=1&rel=0" 
+            src="https://youtube.com" 
             title="Magnates del Juego - Bienvenida"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowFullScreen
