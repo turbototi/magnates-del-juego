@@ -6,7 +6,7 @@ export default function BienvenidaPage() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-gradient-to-tr from-yellow-600/15 via-emerald-600/5 to-transparent rounded-full blur-[90px] pointer-events-none" />
 
       {/* Contenedor flexible que se adapta perfectamente a la pantalla del celular */}
-      <div className="relative z-10 w-full max-w-xs sm:max-w-sm flex flex-col items-center justify-between h-full my-auto space-y-3">
+      <div className="relative z-10 w-full max-w-xs sm:max-w-sm flex flex-col items-center justify-between h-full my-auto space-y-4">
         
         {/* Bitácora y texto principal */}
         <div className="space-y-1.5 text-center w-full">
@@ -26,8 +26,8 @@ export default function BienvenidaPage() {
           </p>
         </div>
 
-        {/* Video directo levantado desde tu carpeta public */}
-        <div className="relative w-full aspect-[9/16] max-h-[40vh] sm:max-h-[440px] bg-zinc-950 rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_25px_rgba(234,179,8,0.15)] flex items-center justify-center my-1">
+        {/* Video en formato vertical fluido con altura desbloqueada */}
+        <div className="relative w-full max-w-[320px] sm:max-w-[340px] aspect-[9/16] bg-zinc-950 rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_25px_rgba(234,179,8,0.15)] flex items-center justify-center my-1 mx-auto">
           <video 
             src="/0902 (1)(1).mp4"
             className="absolute inset-0 w-full h-full object-cover"
