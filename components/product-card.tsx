@@ -11,10 +11,12 @@ export function ProductCard({
   product: Product
   onAdd: (p: Product) => void
 }) {
-  const gallery =
-    product.imagenes && product.imagenes.length > 0
-      ? product.imagenes
-      : [product.imagen]
+  // El truco: agarramos el texto con comas de tu panel y lo convertimos en la galería de fotos
+  const gallery = product.imagen.includes(',')
+    ? product.imagen.split(',').map(img => img.trim())
+    : [product.imagen]
+
+  // Corregido: inicializamos con la primera foto de la lista de forma limpia
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
 
   return (
@@ -28,7 +30,7 @@ export function ProductCard({
           loading="lazy"
         />
         {gallery.length > 1 ? (
-          <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/70 to-transparent p-2">
+          <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/70 to-transparent p-2 z-10">
             {gallery.map((img, i) => (
               <button
                 key={img}
