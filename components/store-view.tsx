@@ -1,10 +1,11 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Zap } from 'lucide-react'
 import type { Product } from '@/lib/store'
 import { CategoryFilter, type Filter } from '@/components/category-filter'
 import { ProductCard } from '@/components/product-card'
+import { loadFoundersRemaining, FOUNDERS_TOTAL } from '@/lib/store'
 
 export function StoreView({
   products,
@@ -17,6 +18,18 @@ export function StoreView({
 }) {
   const [filter, setFilter] = useState<Filter>('todos')
   const [logoClicks, setLogoClicks] = useState(0)
+  const [quedan, setQuedan] = useState(9)
+
+  useEffect(() => {
+    setQuedan(loadFoundersRemaining())
+    const handler = () => setQuedan(loadFoundersRemaining())
+    window.addEventListener('magnates-founders-update', handler)
+    window.addEventListener('storage', handler)
+    return () => {
+      window.removeEventListener('magnates-founders-update', handler)
+      window.removeEventListener('storage', handler)
+    }
+  }, [])
 
   function handleLogoClick() {
     const next = logoClicks + 1
@@ -39,7 +52,7 @@ export function StoreView({
   return (
     <>
       {/* Barra notificación */}
-      <div className="flex items-center justify-center gap-1.5 bg-primary px-4 py-2 text-center text- font-medium leading-tight text-primary-foreground">
+      <div className="flex items-center justify-center gap-1.5 bg-primary px-4 py-2 text-center text-xs font-medium leading-tight text-primary-foreground">
         <Zap className="size-3.5 shrink-0" aria-hidden="true" />
         <span className="text-pretty">
           Productos exclusivos fabricados bajo pedido para la comunidad de
@@ -84,7 +97,7 @@ export function StoreView({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-4">
-            <p className="font-mono text- font-semibold uppercase tracking-[0.2em] text-gold">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               Colección Oficial
             </p>
             <h2 className="mt-1 text-balance text-lg font-bold leading-snug text-white drop-shadow">
@@ -98,11 +111,11 @@ export function StoreView({
           <CategoryFilter active={filter} onChange={setFilter} />
         </div>
 
-        {/* BANNER FUNDADORES - donde marcaste ACA */}
+        {/* BANNER FUNDADORES - AHORA DINAMICO 9/10 */}
         <div className="flex w-full justify-center pt-3 pb-2">
-          <div className="flex items-center justify-center rounded-full bg-amber-400 px-3 py-1.5 shadow-lg animate-pulse">
-            <span className="whitespace-nowrap text-center text- font-black tracking-wide text-black">
-              🔥 01/50 FUNDADORES - Quedan 49/50 + 🎁 Regalo 01
+          <div className="flex items-center justify-center rounded-full bg-amber-400 px-4 py-1.5 shadow-lg animate-pulse">
+            <span className="whitespace-nowrap text-center text-xs font-black tracking-wide text-black">
+              🔥 01/50 FUNDADORES - Quedan {quedan}/{FOUNDERS_TOTAL} + 🎁 Regalo 01
             </span>
           </div>
         </div>
@@ -122,7 +135,7 @@ export function StoreView({
 
         {/* Footer limpio */}
         <footer className="mt-12 flex flex-col items-center gap-3 border-t border-border pt-6 text-center">
-          <p className="text- text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Magnates del Juego · Tienda Oficial
           </p>
         </footer>
