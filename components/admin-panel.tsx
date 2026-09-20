@@ -41,10 +41,16 @@ function ImageField({
   const fileRef = useRef<HTMLInputElement>(null)
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    onChange(`/productos/${file.name}`)
+    const files = e.target.files
+    if (!files || files.length === 0) return
+    const names = Array.from(files).map((f) => `/productos/${f.name}`)
+    const existing = value? value.split(',').map((s) => s.trim()).filter(Boolean) : []
+    const combined = [...existing,...names]
+    const unique = Array.from(new Set(combined))
+    onChange(unique.join(', '))
   }
+
+  const firstImg = value.split(',')[0]?.trim() || value
 
   return (
     <div className="flex flex-col gap-2">
@@ -67,7 +73,7 @@ function ImageField({
         {value? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={value || '/placeholder.svg'}
+            src={firstImg || '/placeholder.svg'}
             alt="Vista previa"
             className="size-10 rounded-lg border border-border object-cover"
           />
@@ -76,6 +82,7 @@ function ImageField({
           ref={fileRef}
           type="file"
           accept="image/*"
+          multiple
           onChange={handleFile}
           className="hidden"
         />
@@ -133,6 +140,15 @@ export function AdminPanel({
     window.dispatchEvent(new Event('magnates-founders-update'))
   }
 
+  // CORRECCIÓN 1: función para parsear varias imágenes
+  function parseImagenes(imagenStr: string): string[] {
+    const list = imagenStr
+     .split(',')
+     .map((s) => s.trim())
+     .filter(Boolean)
+    return list.length > 0? list : ['/placeholder.svg']
+  }
+
   function handleAdd(e: React.FormEvent) {
     e.preventDefault()
     const precioClean = String(form.precio).replace(',', '.')
@@ -143,13 +159,17 @@ export function AdminPanel({
       return
     }
 
+    // CORRECCIÓN 2: guarda imagen + imagenes
+    const imagenes = parseImagenes(form.imagen)
+
     onAdd({
       id: `p-${Date.now()}`,
       nombre: form.nombre.trim(),
       descripcion: form.descripcion.trim(),
       precio,
       categoria: form.categoria,
-      imagen: form.imagen.trim() || '/placeholder.svg',
+      imagen: imagenes[0],
+      imagenes: imagenes,
     })
     setForm(emptyForm)
   }
@@ -164,7 +184,9 @@ export function AdminPanel({
       alert('Por favor, revisa los datos de edición.')
       return
     }
-    onUpdate({...editing, precio })
+    // CORRECCIÓN 3: guarda imagen + imagenes al editar
+    const imagenes = parseImagenes(editing.imagen)
+    onUpdate({...editing, precio, imagen: imagenes[0], imagenes })
     setEditing(null)
   }
 
@@ -399,9 +421,10 @@ export function AdminPanel({
               </form>
             ) : (
               <div className="flex items-center gap-3">
+                {/* CORRECCIÓN 4: muestra primera imagen aunque haya varias */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={p.imagen || '/placeholder.svg'}
+                  src={p.imagenes?.[0] || p.imagen || '/placeholder.svg'}
                   alt={p.nombre}
                   className="size-14 shrink-0 rounded-xl border border-border object-cover"
                 />
