@@ -12,7 +12,7 @@ export function ProductCard({
   onAdd: (p: Product) => void
 }) {
   const gallery = product.imagen.includes(',')
-   ? product.imagen.split(',').map(img => img.trim())
+  ? product.imagen.split(',').map(img => img.trim())
     : [product.imagen]
 
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
@@ -49,18 +49,14 @@ export function ProductCard({
             loading="lazy"
           />
           {isFounder && (
-            <>
-              <div className="absolute top-2.5 left-2.5 z-20">
-                <span className="rounded-full bg-amber-400 px-2.5 py-1 text- font-black text-black shadow-lg">
-                  01/50 EDICIÓN FUNDADORES - Quedan 49/50
-                </span>
-              </div>
-              <div className="absolute top-2.5 right-2.5 z-20">
-                <span className="rounded-full bg-emerald-500 px-2.5 py-1 text- font-bold text-black shadow-lg">
-                  🚚 ENVÍO GRATIS x10
-                </span>
-              </div>
-            </>
+            <div className="absolute top-2 left-2 z-20 flex flex-col items-start gap-1.5">
+              <span className="rounded-full bg-emerald-500 px-2.5 py-1 text- font-black tracking-wide text-black shadow-lg">
+                🚚 ENVÍO GRATIS x10
+              </span>
+              <span className="rounded-full bg-amber-400 px-2.5 py-1 text- font-black tracking-wide text-black shadow-lg">
+                01/50 FUNDADORES - Quedan 49/50
+              </span>
+            </div>
           )}
           {gallery.length > 1? (
             <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2 z-10 overflow-x-auto">
@@ -69,7 +65,11 @@ export function ProductCard({
                   key={img}
                   type="button"
                   onClick={() => setActiveImg(img)}
-                  className={`size-8 shrink-0 overflow-hidden rounded-md border-2 ${activeImg === img? 'border-gold' : 'border-white/30 hover:border-white/60'}`}
+                  aria-label={`Ver imagen ${i + 1} de ${product.nombre}`}
+                  aria-pressed={activeImg === img}
+                  className={`size-8 shrink-0 overflow-hidden rounded-md border-2 transition-colors ${
+                    activeImg === img? 'border-gold' : 'border-white/30 hover:border-white/60'
+                  }`}
                 >
                   <img src={img || '/placeholder.svg'} alt="" className="h-full w-full object-cover" loading="lazy" />
                 </button>
@@ -78,7 +78,7 @@ export function ProductCard({
           ) : null}
         </div>
         <div className="flex flex-1 flex-col gap-2 p-3">
-          <h3 className="text-sm font-semibold leading-tight text-foreground">
+          <h3 className="text-sm font-semibold leading-tight text-balance text-foreground">
             {isFounder? 'Taza Oficial Magnates 01/50 - Oxford Negra 350cc' : product.nombre}
           </h3>
           <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
@@ -95,26 +95,47 @@ export function ProductCard({
                 </span>
               )}
             </div>
-            <button type="button" onClick={() => onAdd(product)} className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-primary text-sm font-semibold text-primary-foreground hover:bg-primary/90">
-              <Plus className="size-4" />
+            <button
+              type="button"
+              onClick={() => onAdd(product)}
+              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-primary text-sm font-semibold text-primary-foreground transition-active active:translate-y-px hover:bg-primary/90"
+            >
+              <Plus className="size-4" aria-hidden="true" />
               Agregar
             </button>
           </div>
         </div>
       </article>
+
       {zoomOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 p-4 backdrop-blur-sm" onClick={() => setZoomOpen(false)}>
-          <button onClick={() => setZoomOpen(false)} className="absolute top-4 right-4 z-50 rounded-full bg-zinc-900/80 p-2.5 text-zinc-400 hover:text-white">
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setZoomOpen(false)}
+        >
+          <button
+            onClick={() => setZoomOpen(false)}
+            className="absolute top-4 right-4 z-50 rounded-full bg-zinc-900/80 p-2.5 text-zinc-400 hover:text-white transition-colors"
+          >
             <X className="size-6" />
           </button>
-          <div className="relative max-h- max-w-xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img src={gallery[zoomIdx] || '/placeholder.svg'} alt={product.nombre} className="max-h- max-w-full rounded-xl object-contain" />
+          <div className="relative max-h- max-w-full sm:max-w-xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={gallery[zoomIdx] || '/placeholder.svg'}
+              alt={product.nombre}
+              className="max-h- max-w-full rounded-xl object-contain shadow-2xl select-none"
+            />
             {gallery.length > 1 && (
               <>
-                <button onClick={prevZoomImg} className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/90 p-3 text-white">
+                <button
+                  onClick={prevZoomImg}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/90 p-3 text-white hover:bg-zinc-800 active:scale-90 transition-all"
+                >
                   <ChevronLeft className="size-6" />
                 </button>
-                <button onClick={nextZoomImg} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/90 p-3 text-white">
+                <button
+                  onClick={nextZoomImg}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/90 p-3 text-white hover:bg-zinc-800 active:scale-90 transition-all"
+                >
                   <ChevronRight className="size-6" />
                 </button>
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-500">
