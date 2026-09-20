@@ -7,6 +7,7 @@ import {
   loadProducts,
   savePaymentInfo,
   saveProducts,
+  loadFoundersRemaining,
   type CartItem,
   type PaymentInfo,
   type Product,
@@ -25,12 +26,23 @@ export function MagnatesApp() {
   const [cart, setCart] = useState<Record<string, number>>({})
   const [view, setView] = useState<'store' | 'admin'>('store')
   const [checkoutOpen, setCheckoutOpen] = useState(false)
+  const [foundersRemaining, setFoundersRemaining] = useState(9)
 
   // Cargar productos y datos de transferencia desde localStorage al montar
   useEffect(() => {
     setProducts(loadProducts())
     setPaymentInfo(loadPaymentInfo())
+    setFoundersRemaining(loadFoundersRemaining())
     setHydrated(true)
+
+    // Escucha cambios del contador desde el checkout
+    const handler = () => setFoundersRemaining(loadFoundersRemaining())
+    window.addEventListener('magnates-founders-update', handler)
+    window.addEventListener('storage', handler)
+    return () => {
+      window.removeEventListener('magnates-founders-update', handler)
+      window.removeEventListener('storage', handler)
+    }
   }, [])
 
   // Persistir en localStorage cada vez que cambian
@@ -44,11 +56,11 @@ export function MagnatesApp() {
 
   const cartItems: CartItem[] = useMemo(() => {
     return Object.entries(cart)
-      .map(([id, cantidad]) => {
+     .map(([id, cantidad]) => {
         const product = products.find((p) => p.id === id)
-        return product ? { ...product, cantidad } : null
+        return product? {...product, cantidad } : null
       })
-      .filter((x): x is CartItem => x !== null)
+     .filter((x): x is CartItem => x!== null)
   }, [cart, products])
 
   const total = useMemo(
@@ -61,7 +73,7 @@ export function MagnatesApp() {
   )
 
   function addToCart(p: Product) {
-    setCart((prev) => ({ ...prev, [p.id]: (prev[p.id] ?? 0) + 1 }))
+    setCart((prev) => ({...prev, [p.id]: (prev[p.id]?? 0) + 1 }))
   }
 
   function updateQuantity(id: string, delta: number) {
@@ -69,34 +81,34 @@ export function MagnatesApp() {
       const current = prev[id] || 0
       const updated = current + delta
       if (updated <= 0) {
-        const next = { ...prev }
+        const next = {...prev }
         delete next[id]
         return next
       }
-      return { ...prev, [id]: updated }
+      return {...prev, [id]: updated }
     })
   }
 
   function removeItem(id: string) {
     setCart((prev) => {
-      const next = { ...prev }
+      const next = {...prev }
       delete next[id]
       return next
     })
   }
 
   function addProduct(p: Product) {
-    setProducts((prev) => [p, ...prev])
+    setProducts((prev) => [p,...prev])
   }
 
   function updateProduct(updated: Product) {
-    setProducts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))
+    setProducts((prev) => prev.map((p) => (p.id === updated.id? updated : p)))
   }
 
   function deleteProduct(id: string) {
-    setProducts((prev) => prev.filter((p) => p.id !== id))
+    setProducts((prev) => prev.filter((p) => p.id!== id))
     setCart((prev) => {
-      const next = { ...prev }
+      const next = {...prev }
       delete next[id]
       return next
     })
@@ -129,7 +141,7 @@ export function MagnatesApp() {
         onCheckoutAction={() => setCheckoutOpen(true)}
       />
       <FloatingChat />
-      {checkoutOpen ? (
+      {checkoutOpen? (
         <CheckoutModal
           items={cartItems}
           total={total}
