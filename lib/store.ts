@@ -81,6 +81,7 @@ export function savePaymentInfo(info: PaymentInfo) {
   window.localStorage.setItem(PAYMENT_KEY, JSON.stringify(info))
 }
 
+// SOLO LA TAZA - NADA MÁS
 export const DEFAULT_PRODUCTS: Product[] = [
   {
     id: 'taza-magnate-01-50',
@@ -96,25 +97,9 @@ export const DEFAULT_PRODUCTS: Product[] = [
       '/productos/luxury_black_wood_box.jpg'
     ],
   },
-  {
-    id: 'buzo-magnate',
-    nombre: 'Buzo Magnate Edition',
-    descripcion: 'Buzo con capucha y friza premium. Calidad superior.',
-    precio: 25000,
-    categoria: 'buzo',
-    imagen: '/placeholder.svg',
-  },
-  {
-    id: 'gorro-magnate',
-    nombre: 'Gorro Snapback Magnate',
-    descripcion: 'Gorra bordada de alta durabilidad.',
-    precio: 14000,
-    categoria: 'gorro',
-    imagen: '/placeholder.svg',
-  },
 ]
 
-const STORAGE_KEY = 'magnates_productos_v4'
+const STORAGE_KEY = 'magnates_productos_v5'
 
 export function loadProducts(): Product[] {
   if (typeof window === 'undefined') return DEFAULT_PRODUCTS
@@ -123,6 +108,8 @@ export function loadProducts(): Product[] {
     if (!raw) return DEFAULT_PRODUCTS
     const parsed = JSON.parse(raw) as Product[]
     if (!Array.isArray(parsed)) return DEFAULT_PRODUCTS
+    // Si el localStorage viejo tenía gorros/buzos, lo ignoramos y volvemos a solo taza
+    if (parsed.length === 0) return DEFAULT_PRODUCTS
     return parsed
   } catch {
     return DEFAULT_PRODUCTS
