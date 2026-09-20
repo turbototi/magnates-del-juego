@@ -10,12 +10,16 @@ import {
   Trash2,
   Wallet,
   X,
+  RotateCcw,
 } from 'lucide-react'
 import {
   CATEGORIES,
   formatARS,
   type Category,
   type Product,
+  FOUNDERS_TOTAL,
+  loadFoundersRemaining,
+  saveFoundersRemaining,
 } from '@/lib/store'
 
 const inputClass =
@@ -24,7 +28,7 @@ const inputClass =
 const labelClass = 'text-xs font-medium text-muted-foreground'
 
 function categoryLabel(id: Category) {
-  return CATEGORIES.find((c) => c.id === id)?.label ?? id
+  return CATEGORIES.find((c) => c.id === id)?.label?? id
 }
 
 function ImageField({
@@ -39,8 +43,6 @@ function ImageField({
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
-    // Evitamos convertir a Base64 para no romper el localStorage con archivos pesados.
-    // Solo sugerimos la ruta local basándonos en el nombre del archivo seleccionado.
     onChange(`/productos/${file.name}`)
   }
 
@@ -48,7 +50,7 @@ function ImageField({
     <div className="flex flex-col gap-2">
       <input
         type="text"
-        value={value.startsWith('data:') ? '' : value}
+        value={value.startsWith('data:')? '' : value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Ej: /productos/Chomba.png"
         className={inputClass}
@@ -62,7 +64,7 @@ function ImageField({
           <ImageUp className="size-3.5" aria-hidden="true" />
           Ruta automática de archivo
         </button>
-        {value ? (
+        {value? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={value || '/placeholder.svg'}
@@ -105,16 +107,16 @@ export function AdminPanel({
 }) {
   const [form, setForm] = useState(emptyForm)
   const [editing, setEditing] = useState<Product | null>(null)
-
-  // Estados para la configuración de cobro (Alias y Titular)
   const [adminAlias, setAdminAlias] = useState('MAGNATES.DEL.JUEGO')
   const [adminTitular, setAdminTitular] = useState('Tu Nombre Completo')
+  const [founders, setFounders] = useState(9)
 
   useEffect(() => {
     const savedAlias = localStorage.getItem('magnates_alias')
     const savedTitular = localStorage.getItem('magnates_titular')
     if (savedAlias) setAdminAlias(savedAlias)
     if (savedTitular) setAdminTitular(savedTitular)
+    setFounders(loadFoundersRemaining())
   }, [])
 
   function handleSaveConfig(e: React.FormEvent) {
@@ -124,13 +126,19 @@ export function AdminPanel({
     alert('¡Datos de cobro actualizados con éxito!')
   }
 
+  function updateFounders(n: number) {
+    const clamped = Math.max(0, Math.min(FOUNDERS_TOTAL, n))
+    setFounders(clamped)
+    saveFoundersRemaining(clamped)
+    window.dispatchEvent(new Event('magnates-founders-update'))
+  }
+
   function handleAdd(e: React.FormEvent) {
     e.preventDefault()
-    // Reemplaza comas por puntos para evitar errores de formato numérico
     const precioClean = String(form.precio).replace(',', '.')
     const precio = Number(precioClean)
 
-    if (!form.nombre.trim() || !Number.isFinite(precio) || precio < 0) {
+    if (!form.nombre.trim() ||!Number.isFinite(precio) || precio < 0) {
       alert('Por favor, ingresa un nombre válido y un precio correcto.')
       return
     }
@@ -152,11 +160,11 @@ export function AdminPanel({
     const precioClean = String(editing.precio).replace(',', '.')
     const precio = Number(precioClean)
 
-    if (!editing.nombre.trim() || !Number.isFinite(precio) || precio < 0) {
+    if (!editing.nombre.trim() ||!Number.isFinite(precio) || precio < 0) {
       alert('Por favor, revisa los datos de edición.')
       return
     }
-    onUpdate({ ...editing, precio })
+    onUpdate({...editing, precio })
     setEditing(null)
   }
 
@@ -174,6 +182,21 @@ export function AdminPanel({
           <ArrowLeft className="size-3.5" aria-hidden="true" />
           Ver tienda
         </button>
+      </div>
+
+      {/* Control Fundadores - NUEVO */}
+      <div className="flex flex-col gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+        <h3 className="text-sm font-semibold text-emerald-400">🔥 Control Fundadores 01/50</h3>
+        <div className="flex items-center justify-between rounded-xl bg-zinc-900 px-3 py-2.5 border border-zinc-800">
+          <span className="text-xs text-zinc-400">Quedan ahora:</span>
+          <span className="font-mono text-base font-bold text-white">{founders}/{FOUNDERS_TOTAL} con envío gratis</span>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          <button type="button" onClick={() => updateFounders(founders - 1)} className="rounded-lg bg-zinc-800 py-2 text-xs font-bold text-white">-1</button>
+          <button type="button" onClick={() => updateFounders(9)} className="inline-flex items-center justify-center gap-1 rounded-lg bg-amber-400 py-2 text-xs font-bold text-black"><RotateCcw className="size-3.5" /> Volver a 9/10</button>
+          <button type="button" onClick={() => updateFounders(founders + 1)} className="rounded-lg bg-zinc-800 py-2 text-xs font-bold text-white">+1</button>
+        </div>
+        <p className="text- text-zinc-400">Tocaste "Enviar comprobante" sin vender? Tocá "Volver a 9/10" y listo.</p>
       </div>
 
       {/* Configuración de Cobro */}
@@ -228,7 +251,7 @@ export function AdminPanel({
           <label className={labelClass}>Nombre</label>
           <input
             value={form.nombre}
-            onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+            onChange={(e) => setForm({...form, nombre: e.target.value })}
             className={inputClass}
             placeholder="Ej: Buzo Magnate"
             required
@@ -238,7 +261,7 @@ export function AdminPanel({
           <label className={labelClass}>Descripción</label>
           <input
             value={form.descripcion}
-            onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
+            onChange={(e) => setForm({...form, descripcion: e.target.value })}
             className={inputClass}
             placeholder="Descripción corta"
           />
@@ -250,7 +273,7 @@ export function AdminPanel({
               type="text"
               inputMode="decimal"
               value={form.precio}
-              onChange={(e) => setForm({ ...form, precio: e.target.value })}
+              onChange={(e) => setForm({...form, precio: e.target.value })}
               className={inputClass}
               placeholder="0"
               required
@@ -261,7 +284,7 @@ export function AdminPanel({
             <select
               value={form.categoria}
               onChange={(e) =>
-                setForm({ ...form, categoria: e.target.value as Category })
+                setForm({...form, categoria: e.target.value as Category })
               }
               className={inputClass}
             >
@@ -277,7 +300,7 @@ export function AdminPanel({
           <label className={labelClass}>Imagen</label>
           <ImageField
             value={form.imagen}
-            onChange={(v) => setForm({ ...form, imagen: v })}
+            onChange={(v) => setForm({...form, imagen: v })}
           />
         </div>
         <button
@@ -299,14 +322,14 @@ export function AdminPanel({
             key={p.id}
             className="rounded-2xl border border-border bg-card p-3"
           >
-            {editing?.id === p.id ? (
+            {editing?.id === p.id? (
               <form onSubmit={handleSaveEdit} className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
                   <label className={labelClass}>Nombre</label>
                   <input
                     value={editing.nombre}
                     onChange={(e) =>
-                      setEditing({ ...editing, nombre: e.target.value })
+                      setEditing({...editing, nombre: e.target.value })
                     }
                     className={inputClass}
                     required
@@ -321,7 +344,7 @@ export function AdminPanel({
                       value={editing.precio}
                       onChange={(e) =>
                         setEditing({
-                          ...editing,
+                         ...editing,
                           precio: e.target.value as unknown as number,
                         })
                       }
@@ -335,7 +358,7 @@ export function AdminPanel({
                       value={editing.categoria}
                       onChange={(e) =>
                         setEditing({
-                          ...editing,
+                         ...editing,
                           categoria: e.target.value as Category,
                         })
                       }
@@ -353,7 +376,7 @@ export function AdminPanel({
                   <label className={labelClass}>Imagen</label>
                   <ImageField
                     value={editing.imagen}
-                    onChange={(v) => setEditing({ ...editing, imagen: v })}
+                    onChange={(v) => setEditing({...editing, imagen: v })}
                   />
                 </div>
                 <div className="flex gap-2">
@@ -386,7 +409,7 @@ export function AdminPanel({
                   <span className="truncate text-sm font-semibold text-foreground">
                     {p.nombre}
                   </span>
-                  <span className="text-[11px] text-muted-foreground">
+                  <span className="text- text-muted-foreground">
                     {categoryLabel(p.categoria)}
                   </span>
                   <span className="font-mono text-sm font-bold text-dollar">
@@ -415,7 +438,7 @@ export function AdminPanel({
             )}
           </div>
         ))}
-        {products.length === 0 ? (
+        {products.length === 0? (
           <p className="rounded-2xl border border-dashed border-border bg-card p-6 text-center text-sm text-muted-foreground">
             No hay productos cargados todavía.
           </p>
