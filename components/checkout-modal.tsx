@@ -35,22 +35,18 @@ function CopyButton({
 
   const handleCopy = async () => {
     try {
-      // Método moderno
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text)
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
         return
       }
-    } catch {
-      // Si falla, pasa al método de respaldo
-    }
+    } catch {}
 
-    // Método de respaldo clásico (compatible con cualquier entorno o IP local)
     try {
       const textArea = document.createElement('textarea')
       textArea.value = text
-      textArea.style.position = 'fixed' // Evita scroll alfanumérico
+      textArea.style.position = 'fixed'
       textArea.style.opacity = '0'
       document.body.appendChild(textArea)
       textArea.focus()
@@ -72,16 +68,16 @@ function CopyButton({
       type="button"
       onClick={handleCopy}
       className={
-        className ??
+        className??
         'inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted'
       }
     >
-      {copied ? (
+      {copied? (
         <Check className="size-3.5 text-dollar" aria-hidden="true" />
       ) : (
         <Copy className="size-3.5" aria-hidden="true" />
       )}
-      {copied ? 'Copiado' : label}
+      {copied? 'Copiado' : label}
     </button>
   )
 }
@@ -99,30 +95,35 @@ export function CheckoutModal({
   onUpdateQuantityAction: (id: string, delta: number) => void
   onRemoveItemAction: (id: string) => void
 }) {
-  // Estados para cargar el Alias y el Titular configurados en el Admin
-  const [alias, setAlias] = useState(ALIAS)
-  const [titular, setTitular] = useState('Tu Nombre Completo')
+  // CORRECCIÓN: Alias visible por defecto para no frenar la venta
+  const [alias, setAlias] = useState('magnates.juego.mp')
+  const [titular, setTitular] = useState('Pedilo Md')
 
   useEffect(() => {
     const savedAlias = localStorage.getItem('magnates_alias')
     const savedTitular = localStorage.getItem('magnates_titular')
     if (savedAlias) setAlias(savedAlias)
     if (savedTitular) setTitular(savedTitular)
+    // Si no hay nada guardado, usa el que te hace vender: magnates.juego.mp
+    if (!savedAlias && ALIAS!== 'magnates.juego.mp') {
+      // Opcional: podés forzar el alias nuevo aunque ALIAS sea otro
+    }
   }, [])
+
+  const isFounderOrder = useMemo(() => items.some(i => i.nombre.toLowerCase().includes('taza')), [items])
 
   const productLines = useMemo(
     () =>
       items
-        .map((i) => {
+       .map((i) => {
           const subtotal = i.precio * i.cantidad
-          const precioTexto = i.precio === 0 ? 'A pedido' : formatARS(subtotal)
-          return `\n   • ${i.nombre} ${i.cantidad > 1 ? `(x${i.cantidad})` : ''} - ${precioTexto}`
+          const precioTexto = i.precio === 0? 'A pedido' : formatARS(subtotal)
+          return `\n • ${i.nombre} ${i.cantidad > 1? `(x${i.cantidad})` : ''} - ${precioTexto}`
         })
-        .join(''),
+       .join(''),
     [items],
   )
 
-  // Lógica inteligente para mostrar el total de forma profesional
   const totalDisplay = useMemo(() => {
     const tieneSinPrecio = items.some((i) => i.precio === 0)
     if (total === 0 && tieneSinPrecio) return 'A cotizar en chat'
@@ -132,14 +133,15 @@ export function CheckoutModal({
 
   const template = useMemo(
     () =>
-      `Hola Magnates! Dejo mis datos para el pedido:
+      `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:
 - Productos:${productLines}
-- Talle (si aplica): 
-- Nombre y Apellido: 
-- Dirección de envío: 
-- Localidad y Provincia: 
-- Código Postal: 
-- Teléfono: `,
+- Talle (si aplica):
+- Nombre y Apellido:
+- Dirección de envío:
+- Localidad y Provincia:
+- Código Postal:
+- Teléfono:
+- Soy de Miramar / Fuera de Miramar: `,
     [productLines],
   )
 
@@ -152,7 +154,7 @@ export function CheckoutModal({
       onClick={onCloseAction}
     >
       <div
-        className="flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl border border-border bg-card animate-in slide-in-from-bottom-6 duration-300 sm:rounded-3xl"
+        className="flex max-h- w-full max-w-md flex-col overflow-hidden rounded-t-3xl border border-border bg-card animate-in slide-in-from-bottom-6 duration-300 sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="flex items-center justify-between border-b border-border px-5 py-4">
@@ -188,13 +190,12 @@ export function CheckoutModal({
                     <span className="text-xs font-semibold text-foreground">
                       {i.nombre}
                     </span>
-                    <span className="text-[11px] text-muted-foreground">
-                      {i.precio === 0 ? 'A pedido' : formatARS(i.precio * i.cantidad)}
+                    <span className="text- text-muted-foreground">
+                      {i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {/* Control de cantidad */}
                     <div className="flex items-center gap-1 rounded-lg border border-border bg-card px-2 py-1">
                       <button
                         type="button"
@@ -217,7 +218,6 @@ export function CheckoutModal({
                       </button>
                     </div>
 
-                    {/* Botón eliminar */}
                     <button
                       type="button"
                       onClick={() => onRemoveItemAction(i.id)}
@@ -232,29 +232,33 @@ export function CheckoutModal({
             </div>
           </section>
 
-          {/* Paso 1 */}
+          {/* Paso 1 - CORRECCIÓN ENVÍO GRATIS */}
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <StepBadge n={1} />
               <h3 className="text-sm font-semibold text-foreground">
-                Acordar envío
+                Envío
               </h3>
+              {isFounderOrder && (
+                <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">
+                  🚚 ENVÍO GRATIS - Quedan 9/10
+                </span>
+              )}
             </div>
-            <div className="flex gap-2 rounded-xl border border-gold/40 bg-gold/10 p-3">
+            <div className="flex gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3">
               <AlertTriangle
-                className="mt-0.5 size-4 shrink-0 text-gold"
+                className="mt-0.5 size-4 shrink-0 text-emerald-400"
                 aria-hidden="true"
               />
               <p className="text-xs leading-relaxed text-foreground">
-                <span className="font-bold text-gold">IMPORTANTE:</span> El
-                precio actual corresponde únicamente al producto. El costo de
-                envío se calculará y sumará al total en el chat de Instagram
-                según tu código postal y localidad.
+                <span className="font-bold text-emerald-400">🚚 ENVÍO GRATIS - Primeros 10 fundadores 01/50 - Quedan 9/10</span>
+                <br />
+                Para Miramar y zona: entrega en mano. Para resto del país: gratis por Correo Argentino en la primera tanda. Después $4.500. Tu taza 01/50 entra como fundador.
               </p>
             </div>
           </section>
 
-          {/* Paso 2 */}
+          {/* Paso 2 - CORRECCIÓN ALIAS VISIBLE */}
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <StepBadge n={2} />
@@ -267,7 +271,7 @@ export function CheckoutModal({
                 <div className="flex items-center gap-2">
                   <Wallet className="size-4 text-dollar" aria-hidden="true" />
                   <div className="flex flex-col leading-tight">
-                    <span className="text-[11px] text-muted-foreground">
+                    <span className="text- text-muted-foreground">
                       Alias
                     </span>
                     <span className="font-mono text-sm font-bold text-foreground">
@@ -278,35 +282,40 @@ export function CheckoutModal({
                 <CopyButton text={alias} label="Copiar" />
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
-                Titular: <span className="text-foreground">{titular}</span>
+                Titular: <span className="text-foreground font-semibold">{titular}</span> - Copiar alias y transferir $35.000
               </p>
             </div>
           </section>
 
-          {/* Paso 3 */}
+          {/* Paso 3 - CORRECCIÓN DATOS + REGALO */}
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <StepBadge n={3} />
               <h3 className="text-sm font-semibold text-foreground">
-                Plantilla de datos
+                Datos + Regalo
               </h3>
+              {isFounderOrder && (
+                <span className="rounded-full bg-amber-400/20 px-2 py-0.5 text- font-bold text-amber-400">
+                  🎁 Regalo sorpresa al 01
+                </span>
+              )}
             </div>
-            <pre className="whitespace-pre-wrap rounded-xl border border-border bg-secondary p-3 font-mono text-[11px] leading-relaxed text-foreground">
+            <pre className="whitespace-pre-wrap rounded-xl border border-border bg-secondary p-3 font-mono text- leading-relaxed text-foreground">
               {template}
             </pre>
             <CopyButton
               text={template}
-              label="📋 Copiar mis datos de envío"
+              label="📋 Copiar mis datos + quiero regalo sorpresa"
               className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-dollar/40 bg-dollar/10 px-3 py-2.5 text-sm font-semibold text-dollar transition-colors hover:bg-dollar/20"
             />
           </section>
 
-          {/* Paso 4 */}
+          {/* Paso 4 - CORRECCIÓN FABRICACIÓN EXCLUSIVA */}
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <StepBadge n={4} />
               <h3 className="text-sm font-semibold text-foreground">
-                Fabricación
+                Fabricación exclusiva
               </h3>
             </div>
             <div className="flex gap-2 rounded-xl border border-border bg-secondary p-3">
@@ -315,9 +324,7 @@ export function CheckoutModal({
                 aria-hidden="true"
               />
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Tras verificar el pago del producto + envío en el chat, tu
-                pedido entra a taller para su fabricación exclusiva y posterior
-                despacho.
+                Tras verificar el pago, tu taza <span className="text-foreground font-bold">01/50</span> entra a taller para fabricación exclusiva. Te mando foto real de tu caja con viruta + QR historia secreta antes de despachar.
               </p>
             </div>
           </section>
@@ -330,6 +337,11 @@ export function CheckoutModal({
               {totalDisplay}
             </span>
           </div>
+          {isFounderOrder && (
+            <p className="text-center text- font-bold text-emerald-400">
+              ✅ Estás entrando como fundador 01/50 con envío gratis + regalo sorpresa
+            </p>
+          )}
         </div>
 
         <header className="flex flex-col gap-2 border-t border-border p-4">
