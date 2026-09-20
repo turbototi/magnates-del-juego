@@ -98,11 +98,11 @@ export function StoreView({
           <CategoryFilter active={filter} onChange={setFilter} />
         </div>
 
-        {/* BANNER FUNDADORES - ACA donde marcaste en rojo */}
-        <div className="flex w-full justify-center pt-2 pb-1">
-          <div className="flex items-center gap-2 rounded-full bg-amber-400 px-4 py-1.5 shadow-lg animate-pulse">
-            <span className="text- font-black tracking-wide text-black">
-              🔥 01/50 EDICIÓN FUNDADORES - Quedan 49/50 + 🎁 Regalo sorpresa al 01
+        {/* BANNER FUNDADORES - donde marcaste ACA */}
+        <div className="flex w-full justify-center pt-3 pb-2">
+          <div className="flex items-center justify-center rounded-full bg-amber-400 px-3 py-1.5 shadow-lg animate-pulse">
+            <span className="whitespace-nowrap text-center text- font-black tracking-wide text-black">
+              🔥 01/50 FUNDADORES - Quedan 49/50 + 🎁 Regalo 01
             </span>
           </div>
         </div>
