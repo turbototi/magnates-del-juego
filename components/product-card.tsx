@@ -49,9 +49,9 @@ export function ProductCard({
             loading="lazy"
           />
           {isFounder && (
-            <div className="absolute left-2 top-2 z-20">
-              <span className="inline-flex whitespace-nowrap rounded-full bg-emerald-500 px-2 py-1 text- font-black leading-none tracking-wide text-black shadow-lg">
-                🚚 ENVÍO GRATIS x10
+            <div className="absolute left-2 top-2 z-20 max-w-[75%]">
+              <span className="inline-flex whitespace-nowrap rounded-full bg-emerald-500 px-2.5 py-1 text- font-black leading-none tracking-wide text-black shadow-lg">
+                ENVÍO GRATIS x10
               </span>
             </div>
           )}
