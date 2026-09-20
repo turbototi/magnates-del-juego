@@ -1,249 +1,127 @@
 'use client'
 
 import { useMemo, useState, useEffect } from 'react'
-import {
-  AlertTriangle,
-  Check,
-  Copy,
-  Factory,
-  MessageCircle,
-  Send,
-  Trash2,
-  Wallet,
-  X,
-} from 'lucide-react'
+import { AlertTriangle, Check, Copy, Factory, MessageCircle, Send, Trash2, Wallet, X } from 'lucide-react'
 import { ALIAS, formatARS, IG_URL, type CartItem } from '@/lib/store'
 
 function StepBadge({ n }: { n: number }) {
-  return (
-    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-gold font-mono text-xs font-bold text-background">
-      {n}
-    </span>
-  )
+  return <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-400 font-mono text-xs font-bold text-black">{n}</span>
 }
 
-function CopyButton({
-  text,
-  label,
-  className,
-}: {
-  text: string
-  label: string
-  className?: string
-}) {
+function CopyButton({ text, label, className }: { text: string; label: string; className?: string }) {
   const [copied, setCopied] = useState(false)
-
   const handleCopy = async () => {
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-        return
-      }
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+      return
     } catch {}
-
-    try {
-      const textArea = document.createElement('textarea')
-      textArea.value = text
-      textArea.style.position = 'fixed'
-      textArea.style.opacity = '0'
-      document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
-      const successful = document.execCommand('copy')
-      document.body.removeChild(textArea)
-
-      if (successful) {
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }
-    } catch (err) {
-      console.error('Error al intentar copiar:', err)
-    }
+    const ta = document.createElement('textarea')
+    ta.value = text
+    ta.style.position = 'fixed'
+    ta.style.opacity = '0'
+    document.body.appendChild(ta)
+    ta.select()
+    document.execCommand('copy')
+    document.body.removeChild(ta)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
-
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      className={
-        className??
-        'inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted'
-      }
-    >
-      {copied? (
-        <Check className="size-3.5 text-emerald-500" aria-hidden="true" />
-      ) : (
-        <Copy className="size-3.5" aria-hidden="true" />
-      )}
-      {copied? 'Copiado' : label}
+    <button type="button" onClick={handleCopy} className={className?? 'inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-xs font-semibold text-white'}>
+      {copied? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />} {copied? 'Copiado' : label}
     </button>
   )
 }
 
-export function CheckoutModal({
-  items,
-  total,
-  onCloseAction,
-  onUpdateQuantityAction,
-  onRemoveItemAction,
-}: {
-  items: CartItem[]
-  total: number
-  onCloseAction: () => void
-  onUpdateQuantityAction: (id: string, delta: number) => void
-  onRemoveItemAction: (id: string) => void
+export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAction, onRemoveItemAction }: {
+  items: CartItem[]; total: number; onCloseAction: () => void; onUpdateQuantityAction: (id: string, delta: number) => void; onRemoveItemAction: (id: string) => void
 }) {
   const [alias, setAlias] = useState('magnates.juego.mp')
   const [titular, setTitular] = useState('Pedilo Md')
-
   useEffect(() => {
-    const savedAlias = localStorage.getItem('magnates_alias')
-    const savedTitular = localStorage.getItem('magnates_titular')
-    if (savedAlias) setAlias(savedAlias)
-    if (savedTitular) setTitular(savedTitular)
+    const sA = localStorage.getItem('magnates_alias')
+    const sT = localStorage.getItem('magnates_titular')
+    if (sA) setAlias(sA)
+    if (sT) setTitular(sT)
   }, [])
 
-  const isFounderOrder = useMemo(() => items.some((i) => i.nombre.toLowerCase().includes('taza')), [items])
-
-  const productLines = useMemo(
-    () =>
-      items
-       .map((i) => {
-          const subtotal = i.precio * i.cantidad
-          const precioTexto = i.precio === 0? 'A pedido' : formatARS(subtotal)
-          return `\n • ${i.nombre} ${i.cantidad > 1? `(x${i.cantidad})` : ''} - ${precioTexto}`
-        })
-       .join(''),
-    [items],
-  )
-
+  const isFounderOrder = useMemo(() => items.some(i => i.nombre.toLowerCase().includes('taza')), [items])
+  const productLines = useMemo(() => items.map(i => `\n • ${i.nombre} ${i.cantidad > 1? `(x${i.cantidad})` : ''} - ${i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}`).join(''), [items])
   const totalDisplay = useMemo(() => {
-    const tieneSinPrecio = items.some((i) => i.precio === 0)
-    if (total === 0 && tieneSinPrecio) return 'A cotizar en chat'
-    if (tieneSinPrecio && total > 0) return `${formatARS(total)} + A pedido`
+    const sinPrecio = items.some(i => i.precio === 0)
+    if (total === 0 && sinPrecio) return 'A cotizar en chat'
+    if (sinPrecio && total > 0) return `${formatARS(total)} + A pedido`
     return formatARS(total)
-  }, [items, total])
-
-  const template = useMemo(
-    () =>
-      `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:
-- Productos:${productLines}
-- Talle (si aplica):
-- Nombre y Apellido:
-- Dirección de envío:
-- Localidad y Provincia:
-- Código Postal:
-- Teléfono:
-- Soy de Miramar / Fuera de Miramar: `,
-    [productLines],
-  )
+  }, [items][total])
+  const template = useMemo(() => `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:\n- Productos:${productLines}\n- Talle (si aplica):\n- Nombre y Apellido:\n- Dirección de envío:\n- Localidad y Provincia:\n- Código Postal:\n- Teléfono:\n- Soy de Miramar / Fuera de Miramar: `, [productLines])
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-background/70 backdrop-blur-md sm:items-center sm:p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="checkout-title"
-      onClick={onCloseAction}
-    >
-      <div
-        className="flex max-h- sm:max-h- w-full max-w-md flex-col overflow-hidden rounded-t-3xl border border-border bg-card sm:rounded-3xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <header className="flex shrink-0 items-center justify-between border-b border-border px-5 py-4">
-          <h2 id="checkout-title" className="font-mono text-sm font-bold uppercase tracking-wide text-gold">
-            Pago y Despacho
-          </h2>
-          <button
-            type="button"
-            onClick={onCloseAction}
-            aria-label="Cerrar"
-            className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            <X className="size-5" aria-hidden="true" />
-          </button>
-        </header>
+    // FIX DEFINITIVO: scroll en el fondo, no en flex-1 anidado
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" onClick={onCloseAction}>
+      <div className="flex min-h-full items-end justify-center sm:items-center sm:p-4">
+        <div className="w-full max-w-md rounded-t- border border-zinc-800 bg-zinc-900 sm:rounded- overflow-hidden" onClick={e => e.stopPropagation()}>
 
-        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto overscroll-contain px-5 py-5">
-          <section className="flex flex-col gap-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Productos en tu pedido</h3>
-            <div className="flex flex-col gap-2">
-              {items.map((i) => (
-                <div key={i.id} className="flex items-center justify-between rounded-xl border border-border bg-secondary p-2.5">
-                  <div className="flex flex-col pr-2">
-                    <span className="text-xs font-semibold text-foreground">{i.nombre}</span>
-                    <span className="text- text-muted-foreground">{i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}</span>
-                  </div>
+          <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4 bg-zinc-900 sticky top-0 z-10">
+            <h2 className="font-mono text-sm font-bold uppercase text-amber-400">Pago y Despacho</h2>
+            <button type="button" onClick={onCloseAction} className="flex size-8 items-center justify-center rounded-full bg-zinc-800 text-zinc-400"><X className="size-5" /></button>
+          </div>
+
+          <div className="flex flex-col gap-6 px-5 py-6">
+            <section className="flex flex-col gap-2">
+              <h3 className="text-xs font-bold uppercase text-zinc-500">Productos</h3>
+              {items.map(i => (
+                <div key={i.id} className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-800/50 p-2.5">
+                  <div className="flex flex-col"><span className="text-xs font-semibold text-white">{i.nombre}</span><span className="text- text-zinc-400">{i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}</span></div>
                   <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1 rounded-lg border border-border bg-card px-2 py-1">
-                      <button type="button" onClick={() => onUpdateQuantityAction(i.id, -1)} className="px-1 text-xs font-bold text-muted-foreground hover:text-foreground">-</button>
-                      <span className="w-4 text-center font-mono text-xs font-bold text-foreground">{i.cantidad}</span>
-                      <button type="button" onClick={() => onUpdateQuantityAction(i.id, 1)} className="px-1 text-xs font-bold text-muted-foreground hover:text-foreground">+</button>
+                    <div className="flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-900 px-2 py-1">
+                      <button onClick={() => onUpdateQuantityAction(i.id, -1)} className="px-1 text-zinc-400">-</button>
+                      <span className="w-4 text-center font-mono text-xs font-bold text-white">{i.cantidad}</span>
+                      <button onClick={() => onUpdateQuantityAction(i.id, 1)} className="px-1 text-zinc-400">+</button>
                     </div>
-                    <button type="button" onClick={() => onRemoveItemAction(i.id)} className="flex size-7 items-center justify-center rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20" aria-label="Eliminar producto"><Trash2 className="size-3.5" /></button>
+                    <button onClick={() => onRemoveItemAction(i.id)} className="flex size-7 items-center justify-center rounded-lg bg-red-500/10 text-red-500"><Trash2 className="size-3.5" /></button>
                   </div>
                 </div>
               ))}
-            </div>
-          </section>
+            </section>
 
-          <section className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <StepBadge n={1} />
-              <h3 className="text-sm font-semibold text-foreground">Envío</h3>
-              {isFounderOrder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">🚚 ENVÍO GRATIS - Quedan 9/10</span>}
-            </div>
-            <div className="flex gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3">
-              <AlertTriangle className="mt-0.5 size-4 shrink-0 text-emerald-400" />
-              <p className="text-xs leading-relaxed text-foreground"><span className="font-bold text-emerald-400">🚚 ENVÍO GRATIS - Primeros 10 fundadores 01/50 - Quedan 9/10</span><br />Para Miramar y zona: entrega en mano. Para resto del país: gratis por Correo Argentino en la primera tanda. Después $4.500. Tu taza 01/50 entra como fundador.</p>
-            </div>
-          </section>
-
-          <section className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <StepBadge n={2} />
-              <h3 className="text-sm font-semibold text-foreground">Transferencia</h3>
-            </div>
-            <div className="rounded-xl border border-border bg-secondary p-3">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2"><Wallet className="size-4 text-emerald-500" /><div className="flex flex-col leading-tight"><span className="text- text-muted-foreground">Alias</span><span className="font-mono text-sm font-bold text-foreground">{alias}</span></div></div>
-                <CopyButton text={alias} label="Copiar" />
+            <section className="flex flex-col gap-2">
+              <div className="flex items-center gap-2"><StepBadge n={1} /><h3 className="text-sm font-semibold text-white">Envío</h3>{isFounderOrder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">ENVÍO GRATIS 9/10</span>}</div>
+              <div className="flex gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3">
+                <AlertTriangle className="size-4 shrink-0 text-emerald-400 mt-0.5" />
+                <p className="text-xs leading-relaxed text-zinc-100"><span className="font-bold text-emerald-400">ENVÍO GRATIS - Primeros 10 fundadores 01/50 - Quedan 9/10</span><br />Para Miramar y zona: entrega en mano. Para resto del país: gratis por Correo Argentino en la primera tanda. Después $4.500. Tu taza 01/50 entra como fundador.</p>
               </div>
-              <p className="mt-2 text-xs text-muted-foreground">Titular: <span className="font-semibold text-foreground">{titular}</span> - Copiar alias y transferir $35.000</p>
-            </div>
-          </section>
+            </section>
 
-          <section className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <StepBadge n={3} />
-              <h3 className="text-sm font-semibold text-foreground">Datos + Regalo</h3>
-              {isFounderOrder && <span className="rounded-full bg-amber-400/20 px-2 py-0.5 text- font-bold text-amber-400">🎁 Regalo sorpresa al 01</span>}
-            </div>
-            <pre className="whitespace-pre-wrap rounded-xl border border-border bg-secondary p-3 font-mono text- leading-relaxed text-foreground">{template}</pre>
-            <CopyButton text={template} label="📋 Copiar mis datos + quiero regalo sorpresa" className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-3 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20" />
-          </section>
+            <section className="flex flex-col gap-2">
+              <div className="flex items-center gap-2"><StepBadge n={2} /><h3 className="text-sm font-semibold text-white">Transferencia</h3></div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-800 p-3">
+                <div className="flex items-center justify-between"><div className="flex items-center gap-2"><Wallet className="size-4 text-emerald-400" /><div className="flex flex-col"><span className="text- text-zinc-400">Alias</span><span className="font-mono text-sm font-bold text-white">{alias}</span></div></div><CopyButton text={alias} label="Copiar" /></div>
+                <p className="mt-2 text-xs text-zinc-400">Titular: <span className="text-white font-semibold">{titular}</span> - Transferir $35.000</p>
+              </div>
+            </section>
 
-          <section className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <StepBadge n={4} />
-              <h3 className="text-sm font-semibold text-foreground">Fabricación exclusiva</h3>
-            </div>
-            <div className="flex gap-2 rounded-xl border border-border bg-secondary p-3">
-              <Factory className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-              <p className="text-xs leading-relaxed text-muted-foreground">Tras verificar el pago, tu taza <span className="font-bold text-foreground">01/50</span> entra a taller para fabricación exclusiva. Te mando foto real de tu caja con viruta + QR historia secreta antes de despachar.</p>
-            </div>
-          </section>
+            <section className="flex flex-col gap-2">
+              <div className="flex items-center gap-2"><StepBadge n={3} /><h3 className="text-sm font-semibold text-white">Datos + Regalo</h3><span className="rounded-full bg-amber-400/20 px-2 py-0.5 text- font-bold text-amber-400">🎁 Regalo al 01</span></div>
+              <pre className="whitespace-pre-wrap rounded-xl border border-zinc-800 bg-zinc-800 p-3 font-mono text- leading-relaxed text-zinc-100">{template}</pre>
+              <CopyButton text={template} label="📋 Copiar mis datos + quiero regalo sorpresa" className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-3 text-sm font-semibold text-emerald-400" />
+            </section>
 
-          <div className="flex items-center justify-between rounded-xl border border-border bg-secondary px-3 py-2.5"><span className="text-xs text-muted-foreground">Total productos</span><span className="font-mono text-base font-bold text-emerald-500">{totalDisplay}</span></div>
-          {isFounderOrder && <p className="text-center text- font-bold text-emerald-400">✅ Estás entrando como fundador 01/50 con envío gratis + regalo sorpresa</p>}
-          <div className="h-6" />
-        </div>
+            <section className="flex flex-col gap-2">
+              <div className="flex items-center gap-2"><StepBadge n={4} /><h3 className="text-sm font-semibold text-white">Fabricación exclusiva</h3></div>
+              <div className="flex gap-2 rounded-xl border border-zinc-800 bg-zinc-800 p-3"><Factory className="size-4 shrink-0 text-zinc-400 mt-0.5" /><p className="text-xs leading-relaxed text-zinc-400">Tras verificar el pago, tu taza <span className="text-white font-bold">01/50</span> entra a taller para fabricación exclusiva. Te mando foto real de tu caja con viruta + QR historia secreta antes de despachar.</p></div>
+            </section>
 
-        <div className="flex shrink-0 flex-col gap-2 border-t border-border bg-card p-4 pb-[max(16px,env(safe-area-inset-bottom))]">
-          <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-amber-400 px-4 py-3.5 text-sm font-bold text-black active:translate-y-px"><Send className="size-5" />ENVIAR COMPROBANTE Y DATOS POR MD</a>
-          <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-border bg-secondary px-4 py-2.5 text-xs font-semibold text-foreground hover:bg-muted"><MessageCircle className="size-4 text-muted-foreground" />¿Tenés alguna duda o consulta? Escribinos antes</a>
+            <div className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-800 px-3 py-2.5"><span className="text-xs text-zinc-400">Total</span><span className="font-mono text-base font-bold text-emerald-400">{totalDisplay}</span></div>
+            {isFounderOrder && <p className="text-center text- font-bold text-emerald-400">✅ Estás entrando como fundador 01/50 con envío gratis + regalo sorpresa</p>}
+          </div>
+
+          <div className="flex flex-col gap-2 border-t border-zinc-800 bg-zinc-900 p-4 pb-[max(16px,env(safe-area-inset-bottom))]">
+            <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-amber-400 px-4 py-3.5 text-sm font-bold text-black"><Send className="size-5" />ENVIAR COMPROBANTE Y DATOS POR MD</a>
+            <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-white"><MessageCircle className="size-4" />¿Tenés alguna duda? Escribinos antes</a>
+          </div>
+
         </div>
       </div>
     </div>
