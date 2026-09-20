@@ -114,7 +114,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
   },
 ]
 
-const STORAGE_KEY = 'magnates_productos_v3'
+const STORAGE_KEY = 'magnates_productos_v4'
 
 export function loadProducts(): Product[] {
   if (typeof window === 'undefined') return DEFAULT_PRODUCTS
