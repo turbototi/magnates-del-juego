@@ -184,7 +184,7 @@ export function AdminPanel({
         </button>
       </div>
 
-      {/* Control Fundadores - NUEVO */}
+      {/* Control Fundadores */}
       <div className="flex flex-col gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
         <h3 className="text-sm font-semibold text-emerald-400">🔥 Control Fundadores 01/50</h3>
         <div className="flex items-center justify-between rounded-xl bg-zinc-900 px-3 py-2.5 border border-zinc-800">
