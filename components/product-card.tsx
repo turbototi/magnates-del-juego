@@ -12,7 +12,7 @@ export function ProductCard({
   onAdd: (p: Product) => void
 }) {
   const gallery = product.imagen.includes(',')
-  ? product.imagen.split(',').map(img => img.trim())
+ ? product.imagen.split(',').map(img => img.trim())
     : [product.imagen]
 
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
@@ -48,13 +48,6 @@ export function ProductCard({
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
-          {isFounder && (
-            <div className="absolute left-2 top-2 z-20 max-w-[75%]">
-              <span className="inline-flex whitespace-nowrap rounded-full bg-emerald-500 px-2.5 py-1 text- font-black leading-none tracking-wide text-black shadow-lg">
-                ENVÍO GRATIS x10
-              </span>
-            </div>
-          )}
           {gallery.length > 1? (
             <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2 z-10 overflow-x-auto">
               {gallery.map((img, i) => (
