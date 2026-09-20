@@ -36,8 +36,15 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
     if (total === 0 && sinPrecio) return 'A cotizar en chat'
     if (sinPrecio && total > 0) return `${formatARS(total)} + A pedido`
     return formatARS(total)
-  }, [items][total])
-  const template = useMemo(() => `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:\n- Productos:${productLines}\n- Talle (si aplica):\n- Nombre y Apellido:\n- Dirección de envío:\n- Localidad y Provincia:\n- Código Postal:\n- Teléfono:\n- Soy de Miramar / Fuera de Miramar: `, [productLines])
+  }, [items, total])
+  const template = useMemo(() => `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:
+- Productos:${productLines}
+- Talle (si aplica):
+- Nombre y Apellido:
+- Dirección de envío:
+- Localidad y Provincia:
+- Código Postal:
+- Teléfono:`, [productLines])
 
   return (
     <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={onCloseAction}>
