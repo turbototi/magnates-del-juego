@@ -45,10 +45,10 @@ export const FOUNDERS_TOTAL = 10
 const FOUNDERS_KEY = 'magnates_fundadores_v1'
 
 export function loadFoundersRemaining(): number {
-  if (typeof window === 'undefined') return 9 // default para SSR
+  if (typeof window === 'undefined') return 9
   try {
     const raw = window.localStorage.getItem(FOUNDERS_KEY)
-    if (raw === null) return 9 // arrancas con 9/10 como me dijiste
+    if (raw === null) return 9
     const n = parseInt(raw, 10)
     return isNaN(n) ? 9 : Math.max(0, Math.min(10, n))
   } catch {
@@ -84,11 +84,17 @@ export function savePaymentInfo(info: PaymentInfo) {
 export const DEFAULT_PRODUCTS: Product[] = [
   {
     id: 'taza-magnate-01-50',
-    nombre: 'Taza Cerámica Magnates 01/50 - Edición Fundador',
-    descripcion: 'Cerámica premium 350ml + caja con viruta + QR historia secreta. Envío gratis a todo el país.',
+    nombre: 'Taza Oficial 01/50 - Oxford Negra 350cc',
+    descripcion: 'Taza Oficial 01/50 - Oxford Negra 350cc. Viene en caja de madera con viruta + QR con historia secreta de Magnates. Solo 50 en el mundo. Los primeros 10 con envío gratis + Regalo 01 sorpresa',
     precio: 35000,
     categoria: 'taza',
-    imagen: '/placeholder.svg',
+    imagen: '/productos/black_box_flatlay.jpg',
+    imagenes: [
+      '/productos/black_box_flatlay.jpg',
+      '/productos/luxury_box_flatlay.jpg',
+      '/productos/magnates_del_juego_card.jpg',
+      '/productos/luxury_black_wood_box.jpg'
+    ],
   },
   {
     id: 'buzo-magnate',
@@ -108,7 +114,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
   },
 ]
 
-const STORAGE_KEY = 'magnates_productos_v2'
+const STORAGE_KEY = 'magnates_productos_v3'
 
 export function loadProducts(): Product[] {
   if (typeof window === 'undefined') return DEFAULT_PRODUCTS
