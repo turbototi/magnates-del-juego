@@ -12,7 +12,7 @@ export function ProductCard({
   onAdd: (p: Product) => void
 }) {
   const gallery = product.imagen.includes(',')
-  ? product.imagen.split(',').map(img => img.trim())
+   ? product.imagen.split(',').map(img => img.trim())
     : [product.imagen]
 
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
@@ -49,12 +49,9 @@ export function ProductCard({
             loading="lazy"
           />
           {isFounder && (
-            <div className="absolute top-2 left-2 z-20 flex flex-col items-start gap-1.5">
+            <div className="absolute top-2 left-2 z-20">
               <span className="rounded-full bg-emerald-500 px-2.5 py-1 text- font-black tracking-wide text-black shadow-lg">
                 🚚 ENVÍO GRATIS x10
-              </span>
-              <span className="rounded-full bg-amber-400 px-2.5 py-1 text- font-black tracking-wide text-black shadow-lg">
-                01/50 FUNDADORES - Quedan 49/50
               </span>
             </div>
           )}
