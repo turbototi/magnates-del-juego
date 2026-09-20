@@ -65,7 +65,7 @@ export function StoreView({
         <header className="flex flex-col items-center gap-3 py-8 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo-magnates.webp"
+            src="/logo-magnates.webp?v=3"
             alt="Logo de Magnates del Juego"
             onClick={handleLogoClick}
             className="mx-auto h-32 w-32 cursor-pointer object-cover select-none drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
@@ -93,7 +93,8 @@ export function StoreView({
             src="/nautico_1920x1080.jpg"
             alt="Gorra y vaso térmico de Magnates del Juego en un entorno náutico premium"
             className="h-56 w-full object-cover sm:h-64"
-            loading="lazy"
+            loading="eager"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-4">
