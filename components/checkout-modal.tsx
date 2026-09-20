@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from 'react'
 import { AlertTriangle, Check, Copy, Factory, MessageCircle, Send, Trash2, Wallet, X } from 'lucide-react'
-import { ALIAS, formatARS, IG_URL, type CartItem } from '@/lib/store'
+import { formatARS, IG_URL, type CartItem } from '@/lib/store'
 
 function StepBadge({ n }: { n: number }) {
   return <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-400 font-mono text-xs font-bold text-black">{n}</span>
@@ -10,29 +10,13 @@ function StepBadge({ n }: { n: number }) {
 
 function CopyButton({ text, label, className }: { text: string; label: string; className?: string }) {
   const [copied, setCopied] = useState(false)
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-      return
-    } catch {}
-    const ta = document.createElement('textarea')
-    ta.value = text
-    ta.style.position = 'fixed'
-    ta.style.opacity = '0'
-    document.body.appendChild(ta)
-    ta.select()
-    document.execCommand('copy')
-    document.body.removeChild(ta)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(text) } catch {
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta)
+    }
+    setCopied(true); setTimeout(() => setCopied(false), 2000)
   }
-  return (
-    <button type="button" onClick={handleCopy} className={className?? 'inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-xs font-semibold text-white'}>
-      {copied? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />} {copied? 'Copiado' : label}
-    </button>
-  )
+  return <button type="button" onClick={copy} className={className?? 'inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-xs font-semibold text-white'}>{copied? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}{copied? 'Copiado' : label}</button>
 }
 
 export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAction, onRemoveItemAction }: {
@@ -41,31 +25,28 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
   const [alias, setAlias] = useState('magnates.juego.mp')
   const [titular, setTitular] = useState('Pedilo Md')
   useEffect(() => {
-    const sA = localStorage.getItem('magnates_alias')
-    const sT = localStorage.getItem('magnates_titular')
-    if (sA) setAlias(sA)
-    if (sT) setTitular(sT)
+    const a = localStorage.getItem('magnates_alias'); if (a) setAlias(a)
+    const t = localStorage.getItem('magnates_titular'); if (t) setTitular(t)
   }, [])
 
-  const isFounderOrder = useMemo(() => items.some(i => i.nombre.toLowerCase().includes('taza')), [items])
+  const isFounder = useMemo(() => items.some(i => i.nombre.toLowerCase().includes('taza')), [items])
   const productLines = useMemo(() => items.map(i => `\n • ${i.nombre} ${i.cantidad > 1? `(x${i.cantidad})` : ''} - ${i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}`).join(''), [items])
   const totalDisplay = useMemo(() => {
     const sinPrecio = items.some(i => i.precio === 0)
     if (total === 0 && sinPrecio) return 'A cotizar en chat'
     if (sinPrecio && total > 0) return `${formatARS(total)} + A pedido`
     return formatARS(total)
-  }, [items][total])
+  }, [items, total])
   const template = useMemo(() => `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:\n- Productos:${productLines}\n- Talle (si aplica):\n- Nombre y Apellido:\n- Dirección de envío:\n- Localidad y Provincia:\n- Código Postal:\n- Teléfono:\n- Soy de Miramar / Fuera de Miramar: `, [productLines])
 
   return (
-    // FIX DEFINITIVO: scroll en el fondo, no en flex-1 anidado
-    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" onClick={onCloseAction}>
-      <div className="flex min-h-full items-end justify-center sm:items-center sm:p-4">
-        <div className="w-full max-w-md rounded-t- border border-zinc-800 bg-zinc-900 sm:rounded- overflow-hidden" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={onCloseAction}>
+      <div className="min-h-full flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div className="w-full max-w-md bg-zinc-900 rounded-t- sm:rounded- border border-zinc-800" onClick={e => e.stopPropagation()}>
 
-          <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4 bg-zinc-900 sticky top-0 z-10">
+          <div className="sticky top-0 z-20 flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-5 py-4 rounded-t-">
             <h2 className="font-mono text-sm font-bold uppercase text-amber-400">Pago y Despacho</h2>
-            <button type="button" onClick={onCloseAction} className="flex size-8 items-center justify-center rounded-full bg-zinc-800 text-zinc-400"><X className="size-5" /></button>
+            <button onClick={onCloseAction} className="flex size-8 items-center justify-center rounded-full bg-zinc-800 text-zinc-400"><X className="size-5" /></button>
           </div>
 
           <div className="flex flex-col gap-6 px-5 py-6">
@@ -87,7 +68,7 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
             </section>
 
             <section className="flex flex-col gap-2">
-              <div className="flex items-center gap-2"><StepBadge n={1} /><h3 className="text-sm font-semibold text-white">Envío</h3>{isFounderOrder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">ENVÍO GRATIS 9/10</span>}</div>
+              <div className="flex items-center gap-2"><StepBadge n={1} /><h3 className="text-sm font-semibold text-white">Envío</h3>{isFounder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">ENVÍO GRATIS 9/10</span>}</div>
               <div className="flex gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3">
                 <AlertTriangle className="size-4 shrink-0 text-emerald-400 mt-0.5" />
                 <p className="text-xs leading-relaxed text-zinc-100"><span className="font-bold text-emerald-400">ENVÍO GRATIS - Primeros 10 fundadores 01/50 - Quedan 9/10</span><br />Para Miramar y zona: entrega en mano. Para resto del país: gratis por Correo Argentino en la primera tanda. Después $4.500. Tu taza 01/50 entra como fundador.</p>
@@ -114,14 +95,12 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
             </section>
 
             <div className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-800 px-3 py-2.5"><span className="text-xs text-zinc-400">Total</span><span className="font-mono text-base font-bold text-emerald-400">{totalDisplay}</span></div>
-            {isFounderOrder && <p className="text-center text- font-bold text-emerald-400">✅ Estás entrando como fundador 01/50 con envío gratis + regalo sorpresa</p>}
           </div>
 
           <div className="flex flex-col gap-2 border-t border-zinc-800 bg-zinc-900 p-4 pb-[max(16px,env(safe-area-inset-bottom))]">
             <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-amber-400 px-4 py-3.5 text-sm font-bold text-black"><Send className="size-5" />ENVIAR COMPROBANTE Y DATOS POR MD</a>
             <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-white"><MessageCircle className="size-4" />¿Tenés alguna duda? Escribinos antes</a>
           </div>
-
         </div>
       </div>
     </div>
