@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from 'react'
 import { AlertTriangle, Check, Copy, Factory, MessageCircle, Send, Trash2, Wallet, X } from 'lucide-react'
-import { formatARS, IG_URL, type CartItem } from '@/lib/store'
+import { formatARS, IG_URL, type CartItem, FOUNDERS_TOTAL, loadFoundersRemaining, saveFoundersRemaining } from '@/lib/store'
 
 function StepBadge({ n }: { n: number }) {
   return <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-400 font-mono text-xs font-bold text-black">{n}</span>
@@ -24,10 +24,23 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
 }) {
   const [alias, setAlias] = useState('magnates.juego.mp')
   const [titular, setTitular] = useState('Pedilo Md')
+  const [quedan, setQuedan] = useState(9)
+
   useEffect(() => {
     const a = localStorage.getItem('magnates_alias'); if (a) setAlias(a)
     const t = localStorage.getItem('magnates_titular'); if (t) setTitular(t)
+    setQuedan(loadFoundersRemaining())
   }, [])
+
+  const handleEnviarComprobante = () => {
+    if (quedan > 0) {
+      const nuevo = quedan - 1
+      setQuedan(nuevo)
+      saveFoundersRemaining(nuevo)
+      // Dispara evento para que magnates-app.tsx se actualice en toda la web
+      window.dispatchEvent(new Event('magnates-founders-update'))
+    }
+  }
 
   const isFounder = useMemo(() => items.some(i => i.nombre.toLowerCase().includes('taza')), [items])
   const productLines = useMemo(() => items.map(i => `\n • ${i.nombre} ${i.cantidad > 1? `(x${i.cantidad})` : ''} - ${i.precio === 0? 'A pedido' : formatARS(i.precio * i.cantidad)}`).join(''), [items])
@@ -78,7 +91,7 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
               <div className="flex items-center gap-2">
                 <StepBadge n={1} />
                 <h3 className="text-sm font-semibold text-white">Envío</h3>
-                {isFounder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">🚚 ENVÍO GRATIS - Quedan 9/10</span>}
+                {isFounder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">🚚 ENVÍO GRATIS - Quedan {quedan}/{FOUNDERS_TOTAL}</span>}
               </div>
               <div className="flex gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3">
                 <AlertTriangle className="size-4 shrink-0 text-emerald-400 mt-0.5" />
@@ -113,7 +126,7 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
           </div>
 
           <div className="flex flex-col gap-2 border-t border-zinc-800 bg-zinc-900 p-4 pb-[max(16px,env(safe-area-inset-bottom))]">
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-amber-400 px-4 py-3.5 text-sm font-bold text-black"><Send className="size-5" />ENVIAR COMPROBANTE Y DATOS POR MD</a>
+            <a href={IG_URL} target="_blank" rel="noopener noreferrer" onClick={handleEnviarComprobante} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-amber-400 px-4 py-3.5 text-sm font-bold text-black"><Send className="size-5" />ENVIAR COMPROBANTE Y DATOS POR MD</a>
             <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-white"><MessageCircle className="size-4" />¿Tenés alguna duda? Escribinos antes</a>
           </div>
         </div>
