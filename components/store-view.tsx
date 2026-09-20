@@ -65,7 +65,7 @@ export function StoreView({
         <header className="flex flex-col items-center gap-3 py-8 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo-magnates.png"
+            src="/logo-magnates.webp"
             alt="Logo de Magnates del Juego"
             onClick={handleLogoClick}
             className="mx-auto h-32 w-32 cursor-pointer object-cover select-none drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
@@ -121,7 +121,7 @@ export function StoreView({
         </div>
 
         {/* Catálogo */}
-        {filtered.length > 0? (
+        {filtered.length > 0 ? (
           <div className="grid grid-cols-2 gap-3 pt-4">
             {filtered.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={onAdd} />
