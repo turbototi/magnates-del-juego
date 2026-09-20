@@ -36,7 +36,7 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
     if (total === 0 && sinPrecio) return 'A cotizar en chat'
     if (sinPrecio && total > 0) return `${formatARS(total)} + A pedido`
     return formatARS(total)
-  }, [items, total])
+  }, [items][total])
   const template = useMemo(() => `Hola Magnates! Soy el fundador 0X/50 - Dejo mis datos + quiero mi regalo sorpresa:\n- Productos:${productLines}\n- Talle (si aplica):\n- Nombre y Apellido:\n- Dirección de envío:\n- Localidad y Provincia:\n- Código Postal:\n- Teléfono:\n- Soy de Miramar / Fuera de Miramar: `, [productLines])
 
   return (
@@ -68,10 +68,18 @@ export function CheckoutModal({ items, total, onCloseAction, onUpdateQuantityAct
             </section>
 
             <section className="flex flex-col gap-2">
-              <div className="flex items-center gap-2"><StepBadge n={1} /><h3 className="text-sm font-semibold text-white">Envío</h3>{isFounder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">ENVÍO GRATIS 9/10</span>}</div>
+              <div className="flex items-center gap-2">
+                <StepBadge n={1} />
+                <h3 className="text-sm font-semibold text-white">Envío</h3>
+                {isFounder && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text- font-bold text-emerald-400">🚚 ENVÍO GRATIS - Quedan 9/10</span>}
+              </div>
               <div className="flex gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3">
                 <AlertTriangle className="size-4 shrink-0 text-emerald-400 mt-0.5" />
-                <p className="text-xs leading-relaxed text-zinc-100"><span className="font-bold text-emerald-400">ENVÍO GRATIS - Primeros 10 fundadores 01/50 - Quedan 9/10</span><br />Para Miramar y zona: entrega en mano. Para resto del país: gratis por Correo Argentino en la primera tanda. Después $4.500. Tu taza 01/50 entra como fundador.</p>
+                <p className="text-xs leading-relaxed text-zinc-100">
+                  <span className="font-bold text-emerald-400">ENVÍO GRATIS - Primeros 10 fundadores 01/50</span>
+                  <br />
+                  Envío gratis a todo el país por Correo Argentino en la primera tanda. Tu taza 01/50 entra como fundador.
+                </p>
               </div>
             </section>
 
