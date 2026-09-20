@@ -11,8 +11,11 @@ export function ProductCard({
   product: Product
   onAdd: (p: Product) => void
 }) {
-  const gallery = product.imagen.includes(',')
- ? product.imagen.split(',').map(img => img.trim())
+  // CORREGIDO: ahora lee imagenes[] con las 4 fotos
+  const gallery = product.imagenes && product.imagenes.length > 0
+  ? product.imagenes
+    : product.imagen.includes(',')
+  ? product.imagen.split(',').map(img => img.trim())
     : [product.imagen]
 
   const [activeImg, setActiveImg] = useState(gallery[0] || product.imagen)
@@ -52,13 +55,13 @@ export function ProductCard({
             <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-2 z-10 overflow-x-auto">
               {gallery.map((img, i) => (
                 <button
-                  key={img}
+                  key={img + i}
                   type="button"
                   onClick={() => setActiveImg(img)}
                   aria-label={`Ver imagen ${i + 1} de ${product.nombre}`}
                   aria-pressed={activeImg === img}
                   className={`size-8 shrink-0 overflow-hidden rounded-md border-2 transition-colors ${
-                    activeImg === img? 'border-gold' : 'border-white/30 hover:border-white/60'
+                    activeImg === img? 'border-yellow-500' : 'border-white/30 hover:border-white/60'
                   }`}
                 >
                   <img src={img || '/placeholder.svg'} alt="" className="h-full w-full object-cover" loading="lazy" />
@@ -80,7 +83,7 @@ export function ProductCard({
                 {product.precio === 0? 'A pedido' : formatARS(product.precio)}
               </span>
               {isFounder && (
-                <span className="text- font-semibold leading-tight text-emerald-400">
+                <span className="text-xs font-semibold leading-tight text-emerald-400">
                   🚚 Envío Gratis primeros 10 + 🎁 Regalo sorpresa al 01
                 </span>
               )}
