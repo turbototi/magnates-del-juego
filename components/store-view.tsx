@@ -31,7 +31,7 @@ export function StoreView({
   const filtered = useMemo(
     () =>
       filter === 'todos'
-        ? products
+       ? products
         : products.filter((p) => p.categoria === filter),
     [products, filter],
   )
@@ -39,7 +39,7 @@ export function StoreView({
   return (
     <>
       {/* Barra notificación */}
-      <div className="flex items-center justify-center gap-1.5 bg-primary px-4 py-2 text-center text-[11px] font-medium leading-tight text-primary-foreground">
+      <div className="flex items-center justify-center gap-1.5 bg-primary px-4 py-2 text-center text- font-medium leading-tight text-primary-foreground">
         <Zap className="size-3.5 shrink-0" aria-hidden="true" />
         <span className="text-pretty">
           Productos exclusivos fabricados bajo pedido para la comunidad de
@@ -84,7 +84,7 @@ export function StoreView({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-4">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
+            <p className="font-mono text- font-semibold uppercase tracking-[0.2em] text-gold">
               Colección Oficial
             </p>
             <h2 className="mt-1 text-balance text-lg font-bold leading-snug text-white drop-shadow">
@@ -98,8 +98,17 @@ export function StoreView({
           <CategoryFilter active={filter} onChange={setFilter} />
         </div>
 
+        {/* BANNER FUNDADORES - ACA donde marcaste en rojo */}
+        <div className="flex w-full justify-center pt-2 pb-1">
+          <div className="flex items-center gap-2 rounded-full bg-amber-400 px-4 py-1.5 shadow-lg animate-pulse">
+            <span className="text- font-black tracking-wide text-black">
+              🔥 01/50 EDICIÓN FUNDADORES - Quedan 49/50 + 🎁 Regalo sorpresa al 01
+            </span>
+          </div>
+        </div>
+
         {/* Catálogo */}
-        {filtered.length > 0 ? (
+        {filtered.length > 0? (
           <div className="grid grid-cols-2 gap-3 pt-4">
             {filtered.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={onAdd} />
@@ -113,7 +122,7 @@ export function StoreView({
 
         {/* Footer limpio */}
         <footer className="mt-12 flex flex-col items-center gap-3 border-t border-border pt-6 text-center">
-          <p className="text-[11px] text-muted-foreground">
+          <p className="text- text-muted-foreground">
             © {new Date().getFullYear()} Magnates del Juego · Tienda Oficial
           </p>
         </footer>
