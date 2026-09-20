@@ -12,7 +12,6 @@ export type Product = {
   precio: number
   categoria: Category
   imagen: string
-  /** Imágenes adicionales (galería). La principal es `imagen`. */
   imagenes?: string[]
 }
 
@@ -26,8 +25,8 @@ export const CATEGORIES: { id: Category; label: string }[] = [
   { id: 'taza', label: '☕ Taza' },
 ]
 
-export const ALIAS = 'MAGNATES.DEL.JUEGO'
-export const IG_URL = 'https://ig.me'
+export const ALIAS = 'magnates.juego.mp'
+export const IG_URL = 'https://ig.me/m/magnatesdeljuego'
 
 export type PaymentInfo = {
   alias: string
@@ -35,11 +34,32 @@ export type PaymentInfo = {
 }
 
 export const DEFAULT_PAYMENT_INFO: PaymentInfo = {
-  alias: 'MAGNATES.DEL.JUEGO',
-  titular: 'Tu Nombre Completo',
+  alias: 'magnates.juego.mp',
+  titular: 'Pedilo Md',
 }
 
 const PAYMENT_KEY = 'magnates_pago_v1'
+
+// --- CONTADOR FUNDADORES AUTOMÁTICO ---
+export const FOUNDERS_TOTAL = 10
+const FOUNDERS_KEY = 'magnates_fundadores_v1'
+
+export function loadFoundersRemaining(): number {
+  if (typeof window === 'undefined') return 9 // default para SSR
+  try {
+    const raw = window.localStorage.getItem(FOUNDERS_KEY)
+    if (raw === null) return 9 // arrancas con 9/10 como me dijiste
+    const n = parseInt(raw, 10)
+    return isNaN(n) ? 9 : Math.max(0, Math.min(10, n))
+  } catch {
+    return 9
+  }
+}
+
+export function saveFoundersRemaining(n: number) {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(FOUNDERS_KEY, String(n))
+}
 
 export function loadPaymentInfo(): PaymentInfo {
   if (typeof window === 'undefined') return DEFAULT_PAYMENT_INFO
@@ -63,6 +83,14 @@ export function savePaymentInfo(info: PaymentInfo) {
 
 export const DEFAULT_PRODUCTS: Product[] = [
   {
+    id: 'taza-magnate-01-50',
+    nombre: 'Taza Cerámica Magnates 01/50 - Edición Fundador',
+    descripcion: 'Cerámica premium 350ml + caja con viruta + QR historia secreta. Envío gratis a todo el país.',
+    precio: 35000,
+    categoria: 'taza',
+    imagen: '/placeholder.svg',
+  },
+  {
     id: 'buzo-magnate',
     nombre: 'Buzo Magnate Edition',
     descripcion: 'Buzo con capucha y friza premium. Calidad superior.',
@@ -76,14 +104,6 @@ export const DEFAULT_PRODUCTS: Product[] = [
     descripcion: 'Gorra bordada de alta durabilidad.',
     precio: 14000,
     categoria: 'gorro',
-    imagen: '/placeholder.svg',
-  },
-  {
-    id: 'taza-magnate',
-    nombre: 'Taza Cerámica Magnates',
-    descripcion: 'Cerámica mate 350ml para tu café diario.',
-    precio: 8500,
-    categoria: 'taza',
     imagen: '/placeholder.svg',
   },
 ]
