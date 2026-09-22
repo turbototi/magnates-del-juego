@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { Zap } from 'lucide-react'
+import { Zap, MessageCircle } from 'lucide-react'
 import type { Product } from '@/lib/store'
 import { CategoryFilter, type Filter } from '@/components/category-filter'
 import { ProductCard } from '@/components/product-card'
@@ -81,6 +81,17 @@ export function StoreView({
             Merchandising premium para quienes juegan a lo grande. Piezas
             exclusivas, fabricadas a demanda para la comunidad.
           </p>
+
+          {/* BOTON WHATSAPP AGREGADO - NO SE SACO NADA */}
+          <a
+            href="https://wa.me/5492235621810?text=Hola!%20Quiero%20la%20TAZA%20001%2F50%20de%20Fundadores%20%F0%9F%94%A5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-4 text-base font-black text-white shadow-[0_8px_24px_rgba(37,211,102,0.3)] hover:bg-[#128C7E] active:scale-95 transition-all"
+          >
+            <MessageCircle className="size-5" />
+            COMPRAR POR WHATSAPP - 001/50
+          </a>
         </header>
 
         {/* Banner publicitario */}
