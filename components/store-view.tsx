@@ -44,7 +44,7 @@ export function StoreView({
   const filtered = useMemo(
     () =>
       filter === 'todos'
-       ? products
+      ? products
         : products.filter((p) => p.categoria === filter),
     [products, filter],
   )
@@ -82,16 +82,19 @@ export function StoreView({
             exclusivas, fabricadas a demanda para la comunidad.
           </p>
 
-          {/* BOTON WHATSAPP AGREGADO - NO SE SACO NADA */}
+          {/* BOTON WHATSAPP - CAJA MAGNATE */}
           <a
-            href="https://wa.me/5492235621810?text=Hola!%20Quiero%20la%20TAZA%20001%2F50%20de%20Fundadores%20%F0%9F%94%A5"
+            href="https://wa.me/5492235621810?text=Hola!%20Quiero%20la%20CAJA%20MAGNATE%20001%2F50%20con%20ENVIO%20GRATIS%20y%20REGALO%20de%20bienvenida%20%F0%9F%94%A5"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-4 text-base font-black text-white shadow-[0_8px_24px_rgba(37,211,102,0.3)] hover:bg-[#128C7E] active:scale-95 transition-all"
           >
             <MessageCircle className="size-5" />
-            COMPRAR POR WHATSAPP - 001/50
+            COMPRAR CAJA MAGNATE
           </a>
+          <p className="text- font-black uppercase tracking-wide text-[#25D366]">
+            🚚 ENVIO GRATIS + 🎁 REGALO BIENVENIDA
+          </p>
         </header>
 
         {/* Banner publicitario */}
@@ -133,7 +136,7 @@ export function StoreView({
         </div>
 
         {/* Catálogo */}
-        {filtered.length > 0 ? (
+        {filtered.length > 0? (
           <div className="grid grid-cols-2 gap-3 pt-4">
             {filtered.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={onAdd} />
