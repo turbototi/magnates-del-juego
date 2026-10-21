@@ -1,79 +1,55 @@
 "use client"
-import { useState } from 'react'
-
 export default function PublicidadPage() {
   return (
-    <div className="min-h-screen bg-[#08080a] text-white">
-      <div className="max-w-5xl mx-auto px-6 py-12">
-        {/* HEADER */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
-            MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span>
-          </h1>
-          <p className="mt-4 text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
-          <p className="mt-6 text-2xl font-light">No contamos goles. Contamos <span className="text-[#FFD700] font-bold">cuánto valen.</span></p>
+    <div className="min-h-screen bg-[#08080a] text-white px-4 py-8 md:px-6 md:py-12">
+      <div className="max-w-5xl mx-auto">
+        
+        <div className="text-center mb-10">
+          <img src="/logo-magnates-clean.png" alt="Magnates del Juego" className="w- md:w- mx-auto mb-6 drop-shadow-2xl" />
+          <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
+          <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
+          <p className="mt-4 text-xl md:text-2xl font-light">No contamos goles. Contamos <span className="text-[#FFD700] font-bold">cuánto valen.</span></p>
+          <p className="mt-2 text-xs md:text-sm opacity-50">Economía, Negocios y Finanzas en el Deporte de Alta Competición</p>
         </div>
 
-        {/* STATS GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
-            <div className="text-3xl font-black text-[#FFD700]">597K</div>
-            <div className="text-sm opacity-60 mt-1">Visualizaciones IG<br/>30 días - 98.6% No Seguidores</div>
-          </div>
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
-            <div className="text-3xl font-black text-[#FFD700]">92K</div>
-            <div className="text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 98.8% Shorts</div>
-          </div>
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
-            <div className="text-3xl font-black">+51%</div>
-            <div className="text-sm opacity-60 mt-1">Tiempo Visualización<br/>354hs - Retención en alza</div>
-          </div>
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
-            <div className="text-3xl font-black">284K</div>
-            <div className="text-sm opacity-60 mt-1">Reel Top<br/>【entity-COLAPINTO¦canonical_name=COLAPINTO】 $2M</div>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">597K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones IG<br/>30 días - 98.6% No Seguidores</div></div>
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">92K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 98.8% Shorts</div></div>
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">+51%</div><div className="text-xs md:text-sm opacity-60 mt-1">Tiempo Visualización<br/>354hs - Retención en alza</div></div>
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">284K</div><div className="text-xs md:text-sm opacity-60 mt-1">Reel Top<br/>COLAPINTO $2M</div></div>
         </div>
 
-        {/* TOP CONTENT */}
-        <div className="bg-[#12121a] p-8 rounded-2xl border border-[#FFD700]/20 mb-12">
-          <h3 className="text-[#FFD700] font-bold tracking-widest mb-4">CONTENIDO QUE EXPLOTA</h3>
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between"><span>Remontada Posible Sepang P21→P15</span><span className="text-[#FFD700]">15.8K YT + 106K IG</span></div>
-            <div className="flex justify-between"><span>Le costó $960K a Alpine en Bakú</span><span className="text-[#FFD700]">14.4K YT</span></div>
-            <div className="flex justify-between"><span>El punto más barato F1: $28K vs $600K</span><span className="text-[#FFD700]">14.1K YT</span></div>
-            <div className="flex justify-between"><span>De €0 a Héroe - 【entity-Enner Valencia¦canonical_name=Enner Valencia】 【entity-Boca¦canonical_name=Boca】</span><span className="text-[#FFD700]">19K IG</span></div>
+        <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-[#FFD700]/20 mb-10">
+          <h3 className="text-[#FFD700] font-bold tracking-widest mb-2">¿QUIÉN NOS MIRA? - El público que compra</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs md:text-sm my-4">
+            <div><b className="text-white text-lg">80.15%</b><br/>Argentina<br/><span className="opacity-60">73,843 views</span></div>
+            <div><b className="text-white text-lg">88.23%</b><br/>Hombres</div>
+            <div><b className="text-white text-lg">74%</b><br/>+45 años con poder adquisitivo</div>
+            <div><b className="text-white text-lg">98.89%</b><br/>No suscritos = viral</div>
           </div>
+          <p className="text-xs opacity-60">55-64:25.13% | 65+:24.57% | 45-54:24.42% | Pico: 21:00-00:00hs - Cuando compran</p>
+          <p className="text-sm mt-4 opacity-80">No es público joven que da like. Es hombre argentino +45 que paga 【entity-TyC Sports¦canonical_name=TyC Sports】, compra camisetas de $90k y deposita en apuestas. Vale 3x más para tu marca.</p>
         </div>
 
-        {/* PACKS */}
-        <h2 className="text-3xl font-black mb-6">PACKS PARA MARCAS</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-[#12121a] p-8 rounded-2xl border border-white/10">
-            <h3 className="font-bold text-lg">PACK TESTEO</h3>
-            <div className="text-4xl font-black mt-2">$40 USD</div>
-            <ul className="mt-4 space-y-2 text-sm opacity-80">
-              <li>✓ 1 Reel IG + 1 Short YT</li>
-              <li>✓ Mención "Presentado por"</li>
-              <li>✓ Link en bio 24hs</li>
-            </ul>
+        <h2 className="text-2xl md:text-3xl font-black mb-4">PACKS LANZAMIENTO - Precios accesibles</h2>
+        <p className="text-xs opacity-60 mb-6">Primeros 10 sponsors - Después aumentan</p>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
+            <h3 className="font-bold">PACK TESTEO</h3><div className="text-3xl font-black mt-2">$18.000 ARS</div><div className="text-xs opacity-60">$18 USD</div>
+            <ul className="mt-4 space-y-1 text-xs opacity-80"><li>✓ 1 Reel IG + 1 Short YT</li><li>✓ Mención "Presentado por"</li><li>✓ Link en bio 24hs</li></ul>
           </div>
-          <div className="bg-[#FFD700] text-black p-8 rounded-2xl">
-            <h3 className="font-black text-lg">PACK MAGNATE ★ MAS VENDIDO</h3>
-            <div className="text-4xl font-black mt-2">$120 USD</div>
-            <ul className="mt-4 space-y-2 text-sm font-medium">
-              <li>✓ 2 Reels IG + 2 Shorts YT</li>
-              <li>✓ 1 Historia con swipe link</li>
-              <li>✓ Guion con tu ángulo de negocio</li>
-              <li>✓ Fijado en comentarios 48hs</li>
-            </ul>
-            <a href="https://www.instagram.com/magnatesdeljuego" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center">HABLAME POR DM →</a>
+          <div className="bg-[#FFD700] text-black p-6 rounded-2xl">
+            <h3 className="font-black">PACK MAGNATE ★ MAS VENDIDO</h3><div className="text-3xl font-black mt-2">$45.000 ARS</div><div className="text-xs font-bold">45 USD</div>
+            <ul className="mt-4 space-y-1 text-xs font-medium"><li>✓ 2 Reels IG + 2 Shorts YT</li><li>✓ 1 Historia con link</li><li>✓ Guion con tu ángulo</li><li>✓ Fijado 48hs</li></ul>
+            <a href="https://www.instagram.com/magnatesdeljuego" className="mt-5 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-sm">HABLAME POR DM →</a>
+          </div>
+          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
+            <h3 className="font-bold">PACK MES</h3><div className="text-3xl font-black mt-2">$120.000 ARS</div><div className="text-xs opacity-60">$120 USD</div>
+            <ul className="mt-4 space-y-1 text-xs opacity-80"><li>✓ 8 piezas al mes</li><li>✓ 2 por semana</li><li>✓ Informe mensual</li></ul>
           </div>
         </div>
 
-        <div className="text-center mt-12 opacity-40 text-sm">
-          Audiencia: 18-34 años | Argentina 85% | Interés: F1, Fútbol Argentino, Negocios del Deporte<br/>
-          Contacto: DM @magnatesdeljuego | Respuesta en &lt; 6hs
-        </div>
+        <div className="text-center mt-10 opacity-40 text-">Audiencia: Hombres +45 | Argentina 80% | F1, Fútbol Argentino, Negocios del Deporte<br/>Contacto: DM @magnatesdeljuego | Respuesta &lt;6hs | Miramar, BA</div>
       </div>
     </div>
   )
