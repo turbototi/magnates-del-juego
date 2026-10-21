@@ -88,7 +88,7 @@ export default function PublicidadPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs md:text-sm my-4">
             <div><b className="text-white text-lg">80.15%</b><br/>Argentina<br/><span className="opacity-60">Público comprador local</span></div>
             <div><b className="text-white text-lg">88.23%</b><br/>Hombres<br/><span className="opacity-60">Audiencia principal</span></div>
-            <div><b className="text-white text-lg">74%</b><br/>+45 años<br/><span className="opacity-60">Con poder adquisitivo</span></div>
+            <div><b className="text-white text-lg">74%</b><br/>+45 años[cite: 1]<br/><span className="opacity-60">Con poder adquisitivo[cite: 1]</span></div>
             <div><b className="text-white text-lg">98.89%</b><br/>No suscritos (YT)<br/><span className="opacity-60">Alto potencial viral</span></div>
           </div>
           <p className="text-xs opacity-60 border-t border-white/5 pt-3 mt-3">Distribución etaria clave: 55-64 (25.13%) | 65+ (24.57%) | 45-54 (24.42%) • Pico de actividad: 21:00 a 00:00 hs</p>
@@ -113,7 +113,7 @@ export default function PublicidadPage() {
                   <span className="bg-[#FFD700]/20 text-[#FFD700] text-xs font-bold px-2 py-0.5 rounded">Núcleo Principal</span>
                 </div>
                 <div className="text-2xl font-black text-[#FFD700]">80,15%</div>
-                <div className="text-sm font-bold mt-1">Argentina</div>
+                <div className="text-sm font-bold mt-1">Argentina[cite: 1]</div>
                 <div className="text-xs opacity-60 mt-0.5">~278K+ Vistas históricas (F1 y Fútbol local)</div>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function PublicidadPage() {
               rel="noopener noreferrer"
               className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs tracking-wide hover:bg-white/20 transition-colors"
             >
-              RESERVAR TESTEO GRATIS
+              POSTULAR MI MARCA (10 cupos)
             </a>
           </div>
 
