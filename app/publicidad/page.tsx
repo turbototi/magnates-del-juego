@@ -1,4 +1,5 @@
 "use client"
+
 export default function PublicidadPage() {
   return (
     <div className="min-h-screen bg-[#08080a] text-white px-4 py-8 md:px-6 md:py-12">
@@ -53,22 +54,34 @@ export default function PublicidadPage() {
 
         {/* PACKS DE LANZAMIENTO */}
         <h2 className="text-2xl md:text-3xl font-black mb-1">PACKS LANZAMIENTO</h2>
-        <p className="text-xs opacity-60 mb-6">Exclusivo para los primeros 10 sponsors - Inversión accesible</p>
+        <p className="text-xs opacity-60 mb-6">Exclusivo para los primeros 10 sponsors - Rompemos el hielo sin riesgo</p>
         
         <div className="grid md:grid-cols-3 gap-4 mb-12">
+          
+          {/* PACK TESTEO (GRATIS) */}
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
             <div>
-              <h3 className="font-bold text-lg">PACK TESTEO</h3>
-              <div className="text-3xl font-black mt-2">$18.000 ARS</div>
-              <div className="text-xs opacity-60 mb-4">$18 USD</div>
+              <span className="bg-white/10 text-[#FFD700] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">⚡ 100% Sin Cargo</span>
+              <h3 className="font-bold text-lg mt-2">PACK TESTEO</h3>
+              <div className="text-3xl font-black text-[#FFD700] mt-2">GRATIS</div>
+              <div className="text-xs opacity-60 mb-4">Primeros 10 sponsors</div>
               <ul className="space-y-2 text-xs opacity-80">
                 <li>✓ 1 Reel en IG + 1 Short en YT</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio durante 24hs</li>
               </ul>
             </div>
+            <a 
+              href="https://ig.me/m/magnatesdeljuego" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs tracking-wide hover:bg-white/20 transition-colors"
+            >
+              RESERVAR TESTEO GRATIS
+            </a>
           </div>
 
+          {/* PACK MAGNATE */}
           <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between relative shadow-xl">
             <div>
               <span className="bg-black text-[#FFD700] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">★ Más Vendido</span>
@@ -76,14 +89,14 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black mt-1">$45.000 ARS</div>
               <div className="text-xs font-bold mb-4">45 USD</div>
               <ul className="space-y-2 text-xs font-medium">
-                <li>✓ 2 Reels en IG + 2 Shorts en YT</li>
-                <li>✓ 1 Historia con link directo</li>
+                <li>✓ 5 Reels en IG + 2 Shorts en YT</li>
+                <li>✓ 2 Historias con link directo</li>
                 <li>✓ Guion adaptado al ángulo de tu marca</li>
                 <li>✓ Contenido fijado por 48hs</li>
               </ul>
             </div>
             <a 
-              href="url?id=0" 
+              href="https://ig.me/m/magnatesdeljuego" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs tracking-wide hover:bg-neutral-900 transition-colors"
@@ -92,18 +105,29 @@ export default function PublicidadPage() {
             </a>
           </div>
 
+          {/* PACK MES */}
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
             <div>
-              <h3 className="font-bold text-lg">PACK MES</h3>
-              <div className="text-3xl font-black mt-2">$120.000 ARS</div>
-              <div className="text-xs opacity-60 mb-4">$120 USD</div>
+              <span className="bg-white/10 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">💼 Alianzas a Largo Plazo</span>
+              <h3 className="font-bold text-lg mt-2">PACK MES</h3>
+              <div className="text-3xl font-black mt-2">$100.000 ARS</div>
+              <div className="text-xs opacity-60 mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 8 piezas de contenido al mes (2 por semana)</li>
+                <li>✓ 10 piezas de contenido al mes</li>
                 <li>✓ Presencia constante en IG y YT</li>
                 <li>✓ Informe mensual de rendimiento y métricas</li>
               </ul>
             </div>
+            <a 
+              href="https://ig.me/m/magnatesdeljuego" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs tracking-wide hover:bg-white/20 transition-colors"
+            >
+              QUIERO EL PACK MENSUAL
+            </a>
           </div>
+
         </div>
 
         {/* PIE DE PÁGINA */}
