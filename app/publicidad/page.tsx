@@ -13,8 +13,10 @@ export default function PublicidadPage() {
           />
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
-          <p className="mt-4 text-xl md:text-2xl font-light">No contamos goles. Contamos <span className="text-[#FFD700] font-bold">cuánto valen.</span></p>
-          <p className="mt-2 text-xs md:text-sm opacity-50">Economía, Negocios y Finanzas en el Deporte de Alta Competición</p>
+          
+          {/* NUEVO SUBTÍTULO COMERCIAL */}
+          <p className="mt-4 text-xl md:text-2xl font-light">Conectamos marcas con el <span className="text-[#FFD700] font-bold">público que toma decisiones.</span></p>
+          <p className="mt-2 text-xs md:text-sm opacity-50">Finanzas deportivas, economía de clubes y negocios con alta llegada en Argentina</p>
         </div>
 
         {/* MÉTRICAS PRINCIPALES */}
@@ -37,7 +39,7 @@ export default function PublicidadPage() {
           </div>
         </div>
 
-        {/* AUDIENCIA Y DEMografía */}
+        {/* AUDIENCIA Y DEMOGRAFÍA */}
         <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-[#FFD700]/20 mb-10">
           <h3 className="text-[#FFD700] font-bold tracking-widest mb-2">¿QUIÉN NOS MIRA? - El público que compra</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs md:text-sm my-4">
@@ -81,7 +83,7 @@ export default function PublicidadPage() {
               </ul>
             </div>
             <a 
-              href="https://instagram.com/magnatesdeljuego" 
+              href="url?id=0" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs tracking-wide hover:bg-neutral-900 transition-colors"
