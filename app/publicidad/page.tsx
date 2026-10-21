@@ -5,7 +5,7 @@ export default function PublicidadPage() {
       <div className="max-w-5xl mx-auto">
         
         <div className="text-center mb-10">
-          <img src="/logo-magnates-clean.png" alt="Magnates del Juego" className="w- md:w- mx-auto mb-6 drop-shadow-2xl" />
+          <img src="/productos/logo-magnates-aca-esta.jpg" alt="Magnates del Juego" className="w- md:w- mx-auto mb-6 drop-shadow-2xl rounded-full" />
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
           <p className="mt-4 text-xl md:text-2xl font-light">No contamos goles. Contamos <span className="text-[#FFD700] font-bold">cuánto valen.</span></p>
@@ -16,7 +16,7 @@ export default function PublicidadPage() {
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">597K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones IG<br/>30 días - 98.6% No Seguidores</div></div>
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">92K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 98.8% Shorts</div></div>
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">+51%</div><div className="text-xs md:text-sm opacity-60 mt-1">Tiempo Visualización<br/>354hs - Retención en alza</div></div>
-          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">284K</div><div className="text-xs md:text-sm opacity-60 mt-1">Reel Top<br/>COLAPINTO $2M</div></div>
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">284K</div><div className="text-xs md:text-sm opacity-60 mt-1">Reel Top<br/>【entity-COLAPINTO¦canonical_name=COLAPINTO】 $2M</div></div>
         </div>
 
         <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-[#FFD700]/20 mb-10">
@@ -27,12 +27,11 @@ export default function PublicidadPage() {
             <div><b className="text-white text-lg">74%</b><br/>+45 años con poder adquisitivo</div>
             <div><b className="text-white text-lg">98.89%</b><br/>No suscritos = viral</div>
           </div>
-          <p className="text-xs opacity-60">55-64:25.13% | 65+:24.57% | 45-54:24.42% | Pico: 21:00-00:00hs - Cuando compran</p>
-          <p className="text-sm mt-4 opacity-80">No es público joven que da like. Es hombre argentino +45 que paga 【entity-TyC Sports¦canonical_name=TyC Sports】, compra camisetas de $90k y deposita en apuestas. Vale 3x más para tu marca.</p>
+          <p className="text-xs opacity-60">55-64:25.13% | 65+:24.57% | 45-54:24.42% | Pico: 21:00-00:00hs</p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black mb-4">PACKS LANZAMIENTO - Precios accesibles</h2>
-        <p className="text-xs opacity-60 mb-6">Primeros 10 sponsors - Después aumentan</p>
+        <h2 className="text-2xl md:text-3xl font-black mb-4">PACKS LANZAMIENTO</h2>
+        <p className="text-xs opacity-60 mb-6">Primeros 10 sponsors - Precios accesibles</p>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
             <h3 className="font-bold">PACK TESTEO</h3><div className="text-3xl font-black mt-2">$18.000 ARS</div><div className="text-xs opacity-60">$18 USD</div>
@@ -41,7 +40,7 @@ export default function PublicidadPage() {
           <div className="bg-[#FFD700] text-black p-6 rounded-2xl">
             <h3 className="font-black">PACK MAGNATE ★ MAS VENDIDO</h3><div className="text-3xl font-black mt-2">$45.000 ARS</div><div className="text-xs font-bold">45 USD</div>
             <ul className="mt-4 space-y-1 text-xs font-medium"><li>✓ 2 Reels IG + 2 Shorts YT</li><li>✓ 1 Historia con link</li><li>✓ Guion con tu ángulo</li><li>✓ Fijado 48hs</li></ul>
-            <a href="https://www.instagram.com/magnatesdeljuego" className="mt-5 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-sm">HABLAME POR DM →</a>
+            <div className="mt-5 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-sm">HABLAME POR DM @magnatesdeljuego</div>
           </div>
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10">
             <h3 className="font-bold">PACK MES</h3><div className="text-3xl font-black mt-2">$120.000 ARS</div><div className="text-xs opacity-60">$120 USD</div>
