@@ -122,7 +122,7 @@ export default function PublicidadPage() {
             <div className="bg-black/40 p-5 rounded-xl border border-white/10 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl">🇲🇽 🇨🇱 🇵🇪 🇺🇾</span>
+                  <span className="text-2xl">🌎</span>
                   <span className="text-xs font-semibold opacity-60">Latinoamérica</span>
                 </div>
                 <div className="text-lg font-bold mt-1">México, Chile, Perú, Uruguay</div>
@@ -224,7 +224,7 @@ export default function PublicidadPage() {
 
         {/* PIE DE PÁGINA */}
         <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs space-y-1">
-          <p>Audiencia principal: Hombres +45 con poder adquisitivo | 80% Argentina[cite: 1] | F1, Fútbol Argentino y Negocios del Deporte</p>
+          <p>Audiencia principal: Hombres +45 con poder adquisitivo[cite: 1] | 80% Argentina[cite: 1] | F1, Fútbol Argentino y Negocios del Deporte</p>
           <p>Contacto directo: DM @magnatesdeljuego | Respuesta estimada &lt; 6 hs | Miramar, Buenos Aires</p>
         </div>
 
