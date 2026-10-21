@@ -5,7 +5,11 @@ export default function PublicidadPage() {
       <div className="max-w-5xl mx-auto">
         
         <div className="text-center mb-10">
-          <img src="/productos/logo-magnates-aca-esta.jpg" alt="Magnates del Juego" className="w- md:w- mx-auto mb-6 drop-shadow-2xl rounded-full" />
+          <img 
+            src="/productos/logo-magnates-aca-esta.jpg" 
+            alt="Magnates del Juego" 
+            className="w-32 h-32 md:w-40 md:h-40 object-cover mx-auto mb-6 drop-shadow-2xl rounded-full border-2 border-[#FFD700]/30" 
+          />
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
           <p className="mt-4 text-xl md:text-2xl font-light">No contamos goles. Contamos <span className="text-[#FFD700] font-bold">cuánto valen.</span></p>
@@ -16,7 +20,7 @@ export default function PublicidadPage() {
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">597K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones IG<br/>30 días - 98.6% No Seguidores</div></div>
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black text-[#FFD700]">92K</div><div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 98.8% Shorts</div></div>
           <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">+51%</div><div className="text-xs md:text-sm opacity-60 mt-1">Tiempo Visualización<br/>354hs - Retención en alza</div></div>
-          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">284K</div><div className="text-xs md:text-sm opacity-60 mt-1">Reel Top<br/>【entity-COLAPINTO¦canonical_name=COLAPINTO】 $2M</div></div>
+          <div className="bg-[#12121a] p-5 md:p-6 rounded-2xl border border-white/10"><div className="text-3xl font-black">284K</div><div className="text-xs md:text-sm opacity-60 mt-1">Reel Top<br/>Colapinto $2M</div></div>
         </div>
 
         <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-[#FFD700]/20 mb-10">
@@ -48,7 +52,7 @@ export default function PublicidadPage() {
           </div>
         </div>
 
-        <div className="text-center mt-10 opacity-40 text-">Audiencia: Hombres +45 | Argentina 80% | F1, Fútbol Argentino, Negocios del Deporte<br/>Contacto: DM @magnatesdeljuego | Respuesta &lt;6hs | Miramar, BA</div>
+        <div className="text-center mt-10 opacity-40 text-xs">Audiencia: Hombres +45 | Argentina 80% | F1, Fútbol Argentino, Negocios del Deporte<br/>Contacto: DM @magnatesdeljuego | Respuesta &lt;6hs | Miramar, BA</div>
       </div>
     </div>
   )
