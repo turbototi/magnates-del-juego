@@ -5,13 +5,15 @@ export default function PublicidadPage() {
     <div className="min-h-screen bg-[#08080a] text-white px-4 py-8 md:px-6 md:py-12">
       <div className="max-w-5xl mx-auto">
         
-        {/* ENCABEZADO Y LOGO */}
+        {/* ENCABEZADO Y LOGO (CON CONTENEDOR PARA OCULTAR BORDE BLANCO) */}
         <div className="text-center mb-10">
-          <img 
-            src="/productos/logo-magnates-aca-esta.jpg" 
-            alt="Magnates del Juego" 
-            className="w-32 h-32 md:w-40 md:h-40 object-cover mx-auto mb-6 drop-shadow-2xl rounded-full border-2 border-[#FFD700]/30" 
-          />
+          <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[#FFD700]/30 shadow-2xl relative bg-black">
+            <img 
+              src="/productos/logo-magnates-aca-esta.jpg" 
+              alt="Magnates del Juego" 
+              className="w-full h-full object-cover scale-105" 
+            />
+          </div>
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
           
@@ -46,7 +48,7 @@ export default function PublicidadPage() {
                 <span className="text-xs font-bold uppercase tracking-wider opacity-70">YouTube</span>
               </div>
               <div className="text-3xl font-black text-[#FFD700]">92K</div>
-              <div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 62.2% Retención</div>
+              <div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 days - 62.2% Retención</div>
             </div>
           </div>
 
