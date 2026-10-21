@@ -48,7 +48,7 @@ export default function PublicidadPage() {
                 <span className="text-xs font-bold uppercase tracking-wider opacity-70">YouTube</span>
               </div>
               <div className="text-3xl font-black text-[#FFD700]">92K</div>
-              <div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 days - 62.2% Retención</div>
+              <div className="text-xs md:text-sm opacity-60 mt-1">Visualizaciones YT<br/>28 días - 62.2% Retención</div>
             </div>
           </div>
 
@@ -92,6 +92,56 @@ export default function PublicidadPage() {
             <div><b className="text-white text-lg">98.89%</b><br/>No suscritos (YT)<br/><span className="opacity-60">Alto potencial viral</span></div>
           </div>
           <p className="text-xs opacity-60 border-t border-white/5 pt-3 mt-3">Distribución etaria clave: 55-64 (25.13%) | 65+ (24.57%) | 45-54 (24.42%) • Pico de actividad: 21:00 a 00:00 hs</p>
+        </div>
+
+        {/* NUEVA SECCIÓN: MAPA / DESGLOSE GEOGRÁFICO DE AUDIENCIA */}
+        <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-white/10 mb-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <div>
+              <span className="text-[#FFD700] text-xs font-bold uppercase tracking-widest">🌍 Alcance Global e Hispanoamericano</span>
+              <h3 className="text-xl md:text-2xl font-black mt-1">Distribución Geográfica de la Audiencia</h3>
+            </div>
+            <p className="text-xs opacity-60 mt-2 md:mt-0">Núcleo fuerte local con expansión en toda Hispanoamérica y España</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Argentina (Destacado Principal) */}
+            <div className="bg-black/40 p-5 rounded-xl border border-[#FFD700]/30 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl">🇦🇷</span>
+                  <span className="bg-[#FFD700]/20 text-[#FFD700] text-xs font-bold px-2 py-0.5 rounded">Núcleo Principal</span>
+                </div>
+                <div className="text-2xl font-black text-[#FFD700]">80,15%</div>
+                <div className="text-sm font-bold mt-1">Argentina</div>
+                <div className="text-xs opacity-60 mt-0.5">~278K+ Vistas históricas (F1 y Fútbol local)</div>
+              </div>
+            </div>
+
+            {/* Hispanoamérica */}
+            <div className="bg-black/40 p-5 rounded-xl border border-white/10 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl">🌎</span>
+                  <span className="text-xs font-semibold opacity-60">Latinoamérica</span>
+                </div>
+                <div className="text-lg font-bold">México, Chile, Perú, Uruguay</div>
+                <div className="text-xs opacity-60 mt-1">Presencia constante en toda la región con alta retención en análisis de negocios deportivos.</div>
+              </div>
+            </div>
+
+            {/* Comunidad Global */}
+            <div className="bg-black/40 p-5 rounded-xl border border-white/10 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl">🇪🇸 🇺🇸</span>
+                  <span className="text-xs font-semibold opacity-60">Europa y Norteamérica</span>
+                </div>
+                <div className="text-lg font-bold">España & Estados Unidos</div>
+                <div className="text-xs opacity-60 mt-1">Comunidad hispanohablante consolidada consumiendo contenido de estrategia y finanzas.</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* PACKS DE LANZAMIENTO */}
@@ -152,7 +202,7 @@ export default function PublicidadPage() {
             <div>
               <span className="bg-white/10 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">💼 Alianzas a Largo Plazo</span>
               <h3 className="font-bold text-lg mt-2">PACK MES</h3>
-              <div className="text-3xl font-black mt-2">$100.000 ARS</div>
+              <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs opacity-60 mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
                 <li>✓ 10 piezas de contenido al mes</li>
@@ -174,7 +224,7 @@ export default function PublicidadPage() {
 
         {/* PIE DE PÁGINA */}
         <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs space-y-1">
-          <p>Audiencia principal: Hombres +45 con poder adquisitivo | 80% Argentina | F1, Fútbol Argentino y Negocios del Deporte</p>
+          <p>Audiencia principal: Hombres +45 con poder adquisitivo | 80% Argentina[cite: 1] | F1, Fútbol Argentino y Negocios del Deporte</p>
           <p>Contacto directo: DM @magnatesdeljuego | Respuesta estimada &lt; 6 hs | Miramar, Buenos Aires</p>
         </div>
 
