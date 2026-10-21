@@ -94,7 +94,7 @@ export default function PublicidadPage() {
           <p className="text-xs opacity-60 border-t border-white/5 pt-3 mt-3">Distribución etaria clave: 55-64 (25.13%) | 65+ (24.57%) | 45-54 (24.42%) • Pico de actividad: 21:00 a 00:00 hs</p>
         </div>
 
-        {/* NUEVA SECCIÓN: MAPA / DESGLOSE GEOGRÁFICO DE AUDIENCIA */}
+        {/* SECCIÓN: DISTRIBUCIÓN GEOGRÁFICA DE LA AUDIENCIA */}
         <div className="bg-[#12121a] p-6 md:p-8 rounded-2xl border border-white/10 mb-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
             <div>
@@ -122,10 +122,10 @@ export default function PublicidadPage() {
             <div className="bg-black/40 p-5 rounded-xl border border-white/10 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl">🌎</span>
+                  <span className="text-2xl">🇲🇽 🇨🇱 🇵🇪 🇺🇾</span>
                   <span className="text-xs font-semibold opacity-60">Latinoamérica</span>
                 </div>
-                <div className="text-lg font-bold">México, Chile, Perú, Uruguay</div>
+                <div className="text-lg font-bold mt-1">México, Chile, Perú, Uruguay</div>
                 <div className="text-xs opacity-60 mt-1">Presencia constante en toda la región con alta retención en análisis de negocios deportivos.</div>
               </div>
             </div>
@@ -137,7 +137,7 @@ export default function PublicidadPage() {
                   <span className="text-2xl">🇪🇸 🇺🇸</span>
                   <span className="text-xs font-semibold opacity-60">Europa y Norteamérica</span>
                 </div>
-                <div className="text-lg font-bold">España & Estados Unidos</div>
+                <div className="text-lg font-bold mt-1">España & Estados Unidos</div>
                 <div className="text-xs opacity-60 mt-1">Comunidad hispanohablante consolidada consumiendo contenido de estrategia y finanzas.</div>
               </div>
             </div>
