@@ -11,19 +11,23 @@ const DEFAULT = {
   instagram_interacciones: "24.000",
   instagram_cuentas: "15.802",
   instagram_seguidores: "1.598",
-  youtube_vistas: "452K",
+  youtube_vistas: "452.346",
   youtube_subs: "521",
+  youtube_horas: "1.344,5 h",
+  youtube_impresiones: "121.315",
+  youtube_ctr: "4,0%",
+  youtube_duracion_media: "22 s",
   top_reel: "294K",
   top_reel_texto: 'Reel Top "NO ES PILOTO DE PAGO, ES NEGOCIO" - 25 Sep',
-  caso_viral_vistas: "38,2K",
-  caso_viral_texto: 'Short: "El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】"'
+  caso_viral_vistas: "53.295",
+  caso_viral_texto: 'Short: "El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】 $28K, 【entity-Gasly¦canonical_name=Gasly】 $600K"'
 }
 
 export default function PublicidadPage() {
   const [m, setM] = useState(DEFAULT)
   useEffect(() => {
     fetch("/metrics.json", { cache: "no-store" })
-      .then(r => r.json()).then(d => setM(d)).catch(() => {})
+      .then(r => r.json()).then(d => setM({ ...DEFAULT, ...d })).catch(() => {})
   }, [])
 
   return (
@@ -63,7 +67,7 @@ export default function PublicidadPage() {
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
             <div className="text-xs font-bold uppercase opacity-70 mb-2">YouTube</div>
             <div className="text-3xl font-black text-[#FFD700]">{m.youtube_vistas}</div>
-            <div className="text-xs opacity-60 mt-1">Visualizaciones totales • {m.youtube_subs} suscriptores</div>
+            <div className="text-xs opacity-60 mt-1">Visualizaciones totales • {m.youtube_subs} suscriptores<br/>{m.youtube_horas} de visualización • CTR {m.youtube_ctr}<br/>{m.youtube_impresiones} impresiones • {m.youtube_duracion_media} media</div>
           </div>
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
             <div className="text-xs font-bold uppercase opacity-70 mb-2">Engagement</div>
