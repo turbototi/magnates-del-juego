@@ -17,7 +17,7 @@ const DEFAULT = {
   top_reel: "294K",
   top_reel_texto: 'Reel Top "NO ES PILOTO DE PAGO, ES NEGOCIO" - 25 Sep',
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: 'Short: "El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"'
+  caso_viral_texto: 'Short: "El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】"'
 }
 
 export default function PublicidadPage() {
@@ -128,8 +128,8 @@ export default function PublicidadPage() {
               <ul className="space-y-2 text-xs opacity-80">
                 <li>✓ 6 Reels {IG_LABEL} + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
-                <li>✓ Presencia constante</li>
-                <li>✓ Informe mensual de resultados</li>
+                <li>✓ Presencia constante + soporte prioritario</li>
+                <li>✓ Informe mensual + llamada de resultados</li>
               </ul>
             </div>
             <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20el%20Pack%20Mes%20%24100.000%20ARS%20%2F%20100%20USD" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
@@ -141,7 +141,7 @@ export default function PublicidadPage() {
           <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20info%20de%20packs%20de%20sponsor" target="_blank" className="inline-block bg-[#25D366] text-black font-bold px-6 py-3 rounded-xl text-sm">HABLAR POR WHATSAPP →</a>
         </div>
 
-        <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs">
+        <div className="text-center pt-6 border-t border-white/10 opacity-65 text-xs">
           <p>Hombres +45 con poder adquisitivo | 80% Argentina | F1, Fútbol, Finanzas</p>
           <p>DM @magnatesdeljuego | Miramar, Buenos Aires</p>
         </div>
