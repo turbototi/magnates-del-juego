@@ -54,7 +54,7 @@ export default function PublicidadPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
-            <div className="text-xs font-bold uppercase opacity-70 mb-2">Instagram</div>
+            <div className="text-xs font-bold uppercase opacity-70 mb-2">【entity-Instagram¦canonical_name=Instagram】</div>
             <div className="text-3xl font-black text-[#FFD700]">{m.instagram_vistas_90d}</div>
             <div className="text-xs opacity-60 mt-1">Visualizaciones 90d • {m.instagram_no_seguidores} No Seguidores<br/>{m.instagram_espectadores} Espectadores • {m.instagram_seguidores} seguidores</div>
           </div>
@@ -85,13 +85,13 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">GRATIS</div>
               <div className="text-xs opacity-60 mb-4">Primeros 10 sponsors</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 1 Reel 【entity-IG¦canonical_name=IG】 + 1 Short YT</li>
+                <li>✓ 1 Reel 【entity-Instagram¦canonical_name=Instagram】 + 1 Short YouTube</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio 24hs</li>
                 <li>✓ 1 pieza total</li>
               </ul>
             </div>
-            <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">POSTULAR MI MARCA</a>
+            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20soy%20de%20la%20marca%20___%2C%20rubro%20___%2C%20quiero%20postularme%20al%20Pack%20Testeo%20Gratis" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">POSTULAR MI MARCA</a>
           </div>
           <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between min-h- border-2 border-[#FFD700]">
             <div>
@@ -100,7 +100,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black mt-1">$45.000 ARS</div>
               <div className="text-xs font-bold mb-4">45 USD</div>
               <ul className="space-y-2 text-xs font-medium">
-                <li>✓ 5 Reels 【entity-IG¦canonical_name=IG】 + 2 Shorts YT</li>
+                <li>✓ 5 Reels Instagram + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Guion adaptado</li>
                 <li>✓ Fijado 48hs</li>
@@ -115,7 +115,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs opacity-60 mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 6 Reels IG + 2 Shorts YT</li>
+                <li>✓ 6 Reels Instagram + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Presencia constante</li>
                 <li>✓ Informe mensual de resultados</li>
@@ -131,7 +131,7 @@ export default function PublicidadPage() {
         </div>
 
         <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs">
-          <p>Hombres +45 con poder adquisitivo | 80% Argentina | F1, Fútbol, Finanzas</p>
+          <p>Hombres +45 con poder adquisitivo | 80% Argentina | 【entity-F1¦canonical_name=F1】, Fútbol, Finanzas</p>
           <p>DM @magnatesdeljuego | Miramar, Buenos Aires</p>
         </div>
       </div>
