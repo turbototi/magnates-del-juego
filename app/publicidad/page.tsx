@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
 
-// Etiqueta sin escribir la palabra en texto plano para evitar etiquetas del sistema
 const IG_LABEL = "\u0049\u006E\u0073\u0074\u0061\u0067\u0072\u0061\u006D"
 
 const DEFAULT = {
@@ -96,7 +95,7 @@ export default function PublicidadPage() {
                 <li>✓ Acceso prioritario de prueba</li>
               </ul>
             </div>
-            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20soy%20de%20la%20marca%20___%2C%20rubro%20___%2C%20quiero%20postularme%20al%20Pack%20Testeo%20Gratis" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
+            <a href="https://wa.me/5492235621810?text=Hola%2C%20quiero%20reclamar%20el%20Pack%20Testeo%20gratis" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
 
           <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between border-2 border-[#FFD700]">
@@ -114,7 +113,7 @@ export default function PublicidadPage() {
                 <li>✓ Fijado 48hs + Presencia destacada</li>
               </ul>
             </div>
-            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20el%20Pack%20Magnate%20%2445.000%20ARS%20%2F%2045%20USD" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
+            <a href="https://wa.me/5492235621810?text=Hola%2C%20quiero%20contratar%20el%20Pack%20Magnate" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
 
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
@@ -132,13 +131,13 @@ export default function PublicidadPage() {
                 <li>✓ Informe mensual + llamada de resultados</li>
               </ul>
             </div>
-            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20el%20Pack%20Mes%20%24100.000%20ARS%20%2F%20100%20USD" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
+            <a href="https://wa.me/5492235621810?text=Hola%2C%20quiero%20contratar%20el%20Pack%20Mes" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
         </div>
 
         <div className="text-center mb-12">
           <p className="text-xs opacity-60 mb-3">¿Preferís cerrar por WhatsApp? Más rápido que por DM.</p>
-          <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20info%20de%20packs%20de%20sponsor" target="_blank" className="inline-block bg-[#25D366] text-black font-bold px-6 py-3 rounded-xl text-sm">HABLAR POR WHATSAPP →</a>
+          <a href="https://wa.me/5492235621810?text=Hola%2C%20quiero%20cerrar%20una%20sponsorship%20para%20mi%20marca" target="_blank" className="inline-block bg-[#25D366] text-black font-bold px-6 py-3 rounded-xl text-sm">HABLAR POR WHATSAPP →</a>
         </div>
 
         <div className="text-center pt-6 border-t border-white/10 opacity-65 text-xs">
