@@ -1,6 +1,9 @@
 "use client"
 import { useEffect, useState } from "react"
 
+// Etiqueta sin escribir la palabra en texto plano para evitar etiquetas del sistema
+const IG_LABEL = "\u0049\u006E\u0073\u0074\u0061\u0067\u0072\u0061\u006D"
+
 const DEFAULT = {
   actualizado: "6 Nov 2026",
   instagram_vistas_90d: "1.035.404",
@@ -12,9 +15,9 @@ const DEFAULT = {
   youtube_vistas: "452K",
   youtube_subs: "521",
   top_reel: "294K",
-  top_reel_texto: "Reel Top NO ES PILOTO DE PAGO, ES NEGOCIO - 25 Sep",
+  top_reel_texto: 'Reel Top "NO ES PILOTO DE PAGO, ES NEGOCIO" - 25 Sep',
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: "Short El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"
+  caso_viral_texto: 'Short: "El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"'
 }
 
 export default function PublicidadPage() {
@@ -54,7 +57,7 @@ export default function PublicidadPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
-            <div className="text-xs font-bold uppercase opacity-70 mb-2">{"【entity-Insta¦canonical_name=Insta】" + "gram"}</div>
+            <div className="text-xs font-bold uppercase opacity-70 mb-2">{IG_LABEL}</div>
             <div className="text-3xl font-black text-[#FFD700]">{m.instagram_vistas_90d}</div>
             <div className="text-xs opacity-60 mt-1">Visualizaciones 90d • {m.instagram_no_seguidores} No Seguidores<br/>{m.instagram_espectadores} Espectadores • {m.instagram_seguidores} seguidores</div>
           </div>
@@ -87,7 +90,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">GRATIS</div>
               <div className="text-xs opacity-60 mb-4 h-">Primeros 10 sponsors</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 1 Reel {"【entity-Insta¦canonical_name=Insta】" + "gram"} + 1 Short YouTube</li>
+                <li>✓ 1 Reel {IG_LABEL} + 1 Short YouTube</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio 24hs</li>
                 <li>✓ Acceso prioritario de prueba</li>
@@ -105,13 +108,13 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black mt-1">$45.000 ARS</div>
               <div className="text-xs font-bold mb-4 h-">45 USD</div>
               <ul className="space-y-2 text-xs font-medium">
-                <li>✓ 5 Reels {"Insta" + "gram"} + 2 Shorts YouTube</li>
+                <li>✓ 5 Reels {IG_LABEL} + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Guion adaptado</li>
                 <li>✓ Fijado 48hs + Presencia destacada</li>
               </ul>
             </div>
-            <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
+            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20el%20Pack%20Magnate%20%2445.000%20ARS%20%2F%2045%20USD" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
 
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
@@ -123,13 +126,13 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs font-bold mb-4 h-">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 6 Reels {"【entity-Insta¦canonical_name=Insta】" + "gram"} + 2 Shorts YouTube</li>
+                <li>✓ 6 Reels {IG_LABEL} + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Presencia constante</li>
                 <li>✓ Informe mensual de resultados</li>
               </ul>
             </div>
-            <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
+            <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20el%20Pack%20Mes%20%24100.000%20ARS%20%2F%20100%20USD" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
         </div>
 
