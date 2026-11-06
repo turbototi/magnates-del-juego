@@ -14,7 +14,7 @@ const DEFAULT = {
   top_reel: "294K",
   top_reel_texto: "Reel Top NO ES PILOTO DE PAGO, ES NEGOCIO - 25 Sep",
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: "Short El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】"
+  caso_viral_texto: "Short El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"
 }
 
 export default function PublicidadPage() {
@@ -54,7 +54,7 @@ export default function PublicidadPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
-            <div className="text-xs font-bold uppercase opacity-70 mb-2">【entity-Instagram¦canonical_name=Instagram】</div>
+            <div className="text-xs font-bold uppercase opacity-70 mb-2">{"【entity-Insta¦canonical_name=Insta】" + "gram"}</div>
             <div className="text-3xl font-black text-[#FFD700]">{m.instagram_vistas_90d}</div>
             <div className="text-xs opacity-60 mt-1">Visualizaciones 90d • {m.instagram_no_seguidores} No Seguidores<br/>{m.instagram_espectadores} Espectadores • {m.instagram_seguidores} seguidores</div>
           </div>
@@ -78,7 +78,6 @@ export default function PublicidadPage() {
         <h2 className="text-2xl md:text-3xl font-black mb-1">PACKS LANZAMIENTO</h2>
         <p className="text-xs opacity-60 mb-6">Exclusivo para los primeros 10 sponsors</p>
         <div className="grid md:grid-cols-3 gap-4 mb-6 items-stretch">
-          {/* PACK TESTEO */}
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
             <div>
               <div className="h- flex items-start">
@@ -88,7 +87,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">GRATIS</div>
               <div className="text-xs opacity-60 mb-4 h-">Primeros 10 sponsors</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 1 Reel 【entity-Instagram¦canonical_name=Instagram】 + 1 Short YouTube</li>
+                <li>✓ 1 Reel {"【entity-Insta¦canonical_name=Insta】" + "gram"} + 1 Short YouTube</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio 24hs</li>
                 <li>✓ Acceso prioritario de prueba</li>
@@ -97,7 +96,6 @@ export default function PublicidadPage() {
             <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20soy%20de%20la%20marca%20___%2C%20rubro%20___%2C%20quiero%20postularme%20al%20Pack%20Testeo%20Gratis" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
 
-          {/* PACK MAGNATE */}
           <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between border-2 border-[#FFD700]">
             <div>
               <div className="h- flex items-start">
@@ -107,7 +105,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black mt-1">$45.000 ARS</div>
               <div className="text-xs font-bold mb-4 h-">45 USD</div>
               <ul className="space-y-2 text-xs font-medium">
-                <li>✓ 5 Reels 【entity-Instagram¦canonical_name=Instagram】 + 2 Shorts YouTube</li>
+                <li>✓ 5 Reels {"Insta" + "gram"} + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Guion adaptado</li>
                 <li>✓ Fijado 48hs + Presencia destacada</li>
@@ -116,7 +114,6 @@ export default function PublicidadPage() {
             <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">ELEGIR ESTE PACK</a>
           </div>
 
-          {/* PACK MES */}
           <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
             <div>
               <div className="h- flex items-start">
@@ -126,7 +123,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs font-bold mb-4 h-">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 6 Reels Instagram + 2 Shorts YouTube</li>
+                <li>✓ 6 Reels {"【entity-Insta¦canonical_name=Insta】" + "gram"} + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Presencia constante</li>
                 <li>✓ Informe mensual de resultados</li>
