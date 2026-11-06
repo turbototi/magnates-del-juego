@@ -10,21 +10,18 @@ const DEFAULT = {
   instagram_cuentas: "15.802",
   instagram_seguidores: "1.598",
   youtube_vistas: "452K",
-  youtube_subs: "520",
+  youtube_subs: "521",
   top_reel: "294K",
   top_reel_texto: "Reel Top NO ES PILOTO DE PAGO, ES NEGOCIO - 25 Sep",
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: "Short El punto más barato de la F1: Colapinto"
+  caso_viral_texto: "Short El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】"
 }
 
 export default function PublicidadPage() {
   const [m, setM] = useState(DEFAULT)
-
   useEffect(() => {
     fetch("/metrics.json", { cache: "no-store" })
-      .then(r => r.json())
-      .then(d => setM(d))
-      .catch(() => {})
+      .then(r => r.json()).then(d => setM(d)).catch(() => {})
   }, [])
 
   return (
@@ -32,11 +29,7 @@ export default function PublicidadPage() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-2 border-[#FFD700]/30 shadow-2xl bg-black">
-            <img
-              src="/logo-magnates.webp"
-              alt="Magnates del Juego"
-              className="w-full h-full object-cover scale-105"
-            />
+            <img src="/logo-magnates.webp" alt="Magnates del Juego" className="w-full h-full object-cover scale-105" />
           </div>
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
@@ -84,8 +77,8 @@ export default function PublicidadPage() {
 
         <h2 className="text-2xl md:text-3xl font-black mb-1">PACKS LANZAMIENTO</h2>
         <p className="text-xs opacity-60 mb-6">Exclusivo para los primeros 10 sponsors</p>
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
+        <div className="grid md:grid-cols-3 gap-4 mb-6">
+          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between min-h-">
             <div>
               <span className="bg-white/10 text-[#FFD700] text- font-black px-3 py-1 rounded-full">⚡ 100% Sin Cargo</span>
               <h3 className="font-bold text-lg mt-2">PACK TESTEO</h3>
@@ -95,18 +88,19 @@ export default function PublicidadPage() {
                 <li>✓ 1 Reel 【entity-IG¦canonical_name=IG】 + 1 Short YT</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio 24hs</li>
+                <li>✓ 1 pieza total</li>
               </ul>
             </div>
             <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">POSTULAR MI MARCA</a>
           </div>
-          <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between">
+          <div className="bg-[#FFD700] text-black p-6 rounded-2xl flex flex-col justify-between min-h- border-2 border-[#FFD700]">
             <div>
               <span className="bg-black text-[#FFD700] text- font-black px-3 py-1 rounded-full">★ Más Vendido</span>
               <h3 className="font-black text-xl mt-2">PACK MAGNATE</h3>
               <div className="text-3xl font-black mt-1">$45.000 ARS</div>
               <div className="text-xs font-bold mb-4">45 USD</div>
               <ul className="space-y-2 text-xs font-medium">
-                <li>✓ 5 Reels IG + 2 Shorts YT</li>
+                <li>✓ 5 Reels 【entity-IG¦canonical_name=IG】 + 2 Shorts YT</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Guion adaptado</li>
                 <li>✓ Fijado 48hs</li>
@@ -114,20 +108,26 @@ export default function PublicidadPage() {
             </div>
             <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">HÁBLAME POR DM</a>
           </div>
-          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
+          <div className="bg-[#12121a] p-6 rounded-2xl border border-white/10 flex flex-col justify-between min-h-">
             <div>
               <span className="bg-white/10 text-white text- font-black px-3 py-1 rounded-full">💼 Mensual</span>
               <h3 className="font-bold text-lg mt-2">PACK MES</h3>
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs opacity-60 mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 10 piezas al mes</li>
+                <li>✓ 6 Reels 【entity-IG¦canonical_name=IG】 + 2 Shorts YT</li>
+                <li>✓ 2 Historias con link</li>
                 <li>✓ Presencia constante</li>
-                <li>✓ Informe mensual</li>
+                <li>✓ Informe mensual de resultados</li>
               </ul>
             </div>
             <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-white/10 text-white w-full py-3 rounded-xl font-bold block text-center text-xs">QUIERO EL PACK MENSUAL</a>
           </div>
+        </div>
+
+        <div className="text-center mb-12">
+          <p className="text-xs opacity-60 mb-3">¿Preferís cerrar por WhatsApp? Más rápido que por DM.</p>
+          <a href="https://wa.me/5492235621810?text=Hola%20Magnates%2C%20quiero%20info%20de%20packs%20de%20sponsor" target="_blank" className="inline-block bg-[#25D366] text-black font-bold px-6 py-3 rounded-xl text-sm">HABLAR POR WHATSAPP →</a>
         </div>
 
         <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs">
