@@ -14,7 +14,7 @@ const DEFAULT = {
   top_reel: "294K",
   top_reel_texto: "Reel Top NO ES PILOTO DE PAGO, ES NEGOCIO - 25 Sep",
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: "Short El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"
+  caso_viral_texto: "Short El punto más barato de la 【entity-F1¦canonical_name=F1】: Colapinto"
 }
 
 export default function PublicidadPage() {
@@ -54,7 +54,7 @@ export default function PublicidadPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
           <div className="bg-[#12121a] p-5 rounded-2xl border border-white/10">
-            <div className="text-xs font-bold uppercase opacity-70 mb-2">【entity-Instagram¦canonical_name=Instagram】</div>
+            <div className="text-xs font-bold uppercase opacity-70 mb-2">Instagram</div>
             <div className="text-3xl font-black text-[#FFD700]">{m.instagram_vistas_90d}</div>
             <div className="text-xs opacity-60 mt-1">Visualizaciones 90d • {m.instagram_no_seguidores} No Seguidores<br/>{m.instagram_espectadores} Espectadores • {m.instagram_seguidores} seguidores</div>
           </div>
@@ -85,7 +85,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">GRATIS</div>
               <div className="text-xs opacity-60 mb-4">Primeros 10 sponsors</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 1 Reel 【entity-Instagram¦canonical_name=Instagram】 + 1 Short YouTube</li>
+                <li>✓ 1 Reel Instagram + 1 Short YouTube</li>
                 <li>✓ Mención "Presentado por"</li>
                 <li>✓ Link en bio 24hs</li>
                 <li>✓ 1 pieza total</li>
@@ -103,7 +103,7 @@ export default function PublicidadPage() {
                 <li>✓ 5 Reels Instagram + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Guion adaptado</li>
-                <li>✓ Fijado 48hs</li>
+                <li>✓ Fijado 48hs + Presencia destacada</li>
               </ul>
             </div>
             <a href="https://ig.me/m/magnatesdeljuego" target="_blank" className="mt-6 bg-black text-white w-full py-3 rounded-xl font-bold block text-center text-xs">HÁBLAME POR DM</a>
@@ -113,7 +113,7 @@ export default function PublicidadPage() {
               <span className="bg-white/10 text-white text- font-black px-3 py-1 rounded-full">💼 Mensual</span>
               <h3 className="font-bold text-lg mt-2">PACK MES</h3>
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
-              <div className="text-xs opacity-60 mb-4">100 USD</div>
+              <div className="text-xs font-bold mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
                 <li>✓ 6 Reels Instagram + 2 Shorts YouTube</li>
                 <li>✓ 2 Historias con link</li>
@@ -131,7 +131,7 @@ export default function PublicidadPage() {
         </div>
 
         <div className="text-center pt-6 border-t border-white/10 opacity-40 text-xs">
-          <p>Hombres +45 con poder adquisitivo | 80% Argentina | 【entity-F1¦canonical_name=F1】, Fútbol, Finanzas</p>
+          <p>Hombres +45 con poder adquisitivo | 80% Argentina | F1, Fútbol, Finanzas</p>
           <p>DM @magnatesdeljuego | Miramar, Buenos Aires</p>
         </div>
       </div>
