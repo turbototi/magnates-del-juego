@@ -14,7 +14,7 @@ const DEFAULT = {
   top_reel: "294K",
   top_reel_texto: "Reel Top NO ES PILOTO DE PAGO, ES NEGOCIO - 25 Sep",
   caso_viral_vistas: "38,2K",
-  caso_viral_texto: "Short El punto más barato de la F1: 【entity-Colapinto¦canonical_name=Colapinto】"
+  caso_viral_texto: "Short El punto más barato de la 【entity-F1¦canonical_name=F1】: 【entity-Colapinto¦canonical_name=Colapinto】"
 }
 
 export default function PublicidadPage() {
@@ -34,7 +34,7 @@ export default function PublicidadPage() {
           <h1 className="text-4xl md:text-7xl font-black tracking-tighter">MAGNATES <span className="text-[#FFD700]">DEL JUEGO</span></h1>
           <p className="mt-3 text-sm md:text-xl tracking-[0.3em] opacity-60">DEPORTES • DINERO • ESTRATEGIA</p>
           <p className="mt-4 text-xl md:text-2xl font-light">Conectamos marcas con el <span className="text-[#FFD700] font-bold">público que toma decisiones.</span></p>
-          <p className="mt-2 text-xs md:text-sm opacity-50">No contamos goles. Contamos cuánto valen. • Actualizado: {m.actualizado}</p>
+          <p className="mt-2 text-xs md:text-sm opacity-50">Convertimos la pasión por el deporte en clientes para tu marca. • Actualizado: {m.actualizado}</p>
         </div>
 
         <div className="bg-gradient-to-br from-[#FFD700]/10 to-[#12121a] p-6 md:p-8 rounded-2xl border border-[#FFD700]/40 mb-10">
@@ -115,7 +115,7 @@ export default function PublicidadPage() {
               <div className="text-3xl font-black text-[#FFD700] mt-2">$100.000 ARS</div>
               <div className="text-xs opacity-60 mb-4">100 USD</div>
               <ul className="space-y-2 text-xs opacity-80">
-                <li>✓ 6 Reels 【entity-IG¦canonical_name=IG】 + 2 Shorts YT</li>
+                <li>✓ 6 Reels IG + 2 Shorts YT</li>
                 <li>✓ 2 Historias con link</li>
                 <li>✓ Presencia constante</li>
                 <li>✓ Informe mensual de resultados</li>
